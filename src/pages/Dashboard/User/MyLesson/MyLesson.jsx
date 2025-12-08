@@ -1,23 +1,23 @@
 import React from 'react';
-import { useState } from "react";
 import Swal from "sweetalert2";
 import UpdateLesson from '../UpdateLesson/UpdateLesson';
+import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../../../hooks/useAuth';
+import axios from 'axios';
+import LoadingSpinner from '../../../../components/Shared/LoadingSpinner';
 
 const MyLesson = () => {
-
-    // Static dummy lesson (Replace later using .map())
-    const [lessons] = useState([
-        {
-            _id: "123", // To be used later for PUT/PATCH/DELETE
-            title: "What Failure Taught Me",
-            category: "Personal Growth",
-            accessLevel: "free", // or "premium"
-            privacy: "public",   // or "private"
-            createdAt: "2025-02-01",
-            likesCount: 45,
-            favoritesCount: 15,
-        },
-    ]);
+    const { user } = useAuth();
+    // get my all lessons from the db
+    const { data: lessons = [], isLoading } = useQuery({
+        queryKey: ['lessons', user.email],
+        queryFn: async () => {
+            const result = await axios.get(`${import.meta.env.VITE_API_URL}/my-lessons/${user?.email}`)
+            return result.data;
+        }
+    })
+    // loading
+  if(isLoading) return <LoadingSpinner/>
 
     // Handlers (to connect later with API)
     const handleTogglePrivacy = (id) => {

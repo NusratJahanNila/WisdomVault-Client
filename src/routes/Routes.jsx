@@ -7,10 +7,11 @@ import DashboardLayout from '../layouts/DashboardLayout'
 import { createBrowserRouter } from 'react-router'
 import AddLesson from '../pages/Dashboard/User/AddLesson/AddLesson'
 import MyLesson from '../pages/Dashboard/User/MyLesson/MyLesson'
-import UpdateLesson from '../pages/Dashboard/User/UpdateLesson/UpdateLessonModal'
 import PrivateRoute from './PrivateRoute'
 import Profile from '../pages/Dashboard/Profile/Profile'
 import DashboardHome from '../pages/Dashboard/Common/DashboardHome'
+import ManageLesson from '../pages/Dashboard/Admin/ManageLesson/ManageLesson'
+import PublicLessons from '../pages/PublicLessons/PublicLessons'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -21,10 +22,10 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
-    //   {
-    //     path: '/plant/:id',
-    //     element: <PlantDetails />,
-    //   },
+      {
+        path: '/public-lessons',
+        element:<PublicLessons />
+      }
     ],
   },
   { path: '/login', element: <Login /> },
@@ -61,11 +62,12 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // admin routes
       {
-        path: 'update-lesson',
+        path: 'manage-lessons',
         element: (
           <PrivateRoute>
-            <UpdateLesson></UpdateLesson>
+            <ManageLesson></ManageLesson>
           </PrivateRoute>
         ),
       },
