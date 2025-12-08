@@ -3,6 +3,8 @@ import { FcGoogle } from 'react-icons/fc'
 import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
+import { imageUpload,  } from '../../utils'
+import { useForm } from 'react-hook-form'
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } = useAuth()
@@ -10,22 +12,35 @@ const SignUp = () => {
   const location = useLocation()
   const from = location.state || '/'
 
-  // form submit handler
-  const handleSubmit = async event => {
-    event.preventDefault()
-    const form = event.target
-    const name = form.name.value
-    const email = form.email.value
-    const password = form.password.value
+  // react hook form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  // Form submit
+
+  const onSubmit = async (data) => {
+    const { name, image, email, password } = data;
+    // image file
+    const imageFile = image[0];
 
     try {
+      // 1.upload img
+      const imageURL = await imageUpload(imageFile);
+
       //2. User Registration
       const result = await createUser(email, password)
+
+      // save or update user via signup
+      // await saveOrUpdateUser({ name, email, image: imageURL })
+
 
       //3. Save username & profile photo
       await updateUserProfile(
         name,
-        'https://lh3.googleusercontent.com/a/ACg8ocKUMU3XIX-JSUB80Gj_bYIWfYudpibgdwZE1xqmAGxHASgdvCZZ=s96-c'
+        imageURL
       )
       console.log(result)
 
@@ -41,7 +56,15 @@ const SignUp = () => {
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      await signInWithGoogle()
+      const result = await signInWithGoogle()
+      console.log(result)
+
+      // save or update user via signup
+      // await saveOrUpdateUser({
+      //   name: result?.user?.displayName,
+      //   email: result?.user?.email,
+      //   image: result?.user?.photoURL
+      // })
 
       navigate(from, { replace: true })
       toast.success('Signup Successful')
@@ -58,7 +81,7 @@ const SignUp = () => {
           <p className='text-sm text-gray-400'>Welcome to PlantNet</p>
         </div>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'
@@ -70,12 +93,19 @@ const SignUp = () => {
               </label>
               <input
                 type='text'
-                name='name'
                 id='name'
                 placeholder='Enter Your Name Here'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-secondary bg-gray-200 text-gray-900'
                 data-temp-mail-org='0'
+                {...register('name', {
+                  required: 'Name is required',
+                  maxLength: {
+                    value: 20,
+                    message: "Name must be within 20 character"
+                  }
+                })}
               />
+              {errors.name && <p className='text-red-600 text-sm'>{errors.name.message}</p>}
             </div>
             {/* Image */}
             <div>
@@ -86,7 +116,7 @@ const SignUp = () => {
                 Profile Image
               </label>
               <input
-                name='image'
+                {...register('image')}
                 type='file'
                 id='image'
                 accept='image/*'
@@ -94,30 +124,39 @@ const SignUp = () => {
       file:mr-4 file:py-2 file:px-4
       file:rounded-md file:border-0
       file:text-sm file:font-semibold
-      file:bg-lime-50 file:text-lime-700
-      hover:file:bg-lime-100
-      bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
-      focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
+      file:bg-lime-50 file:text-secondary
+      hover:file:bg-teal-100
+      bg-gray-100 border border-dashed border-secondary rounded-md cursor-pointer
+      focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary
       py-2'
               />
               <p className='mt-1 text-xs text-gray-400'>
                 PNG, JPG or JPEG (max 2MB)
               </p>
             </div>
+            {/* Email */}
             <div>
               <label htmlFor='email' className='block mb-2 text-sm'>
                 Email address
               </label>
               <input
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: 'Please enter a valid email'
+                  }
+
+                })}
                 type='email'
-                name='email'
                 id='email'
-                required
                 placeholder='Enter Your Email Here'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-secondary bg-gray-200 text-gray-900'
                 data-temp-mail-org='0'
               />
+              {errors.email && <p className='text-red-600 text-sm'>{errors.email.message}</p>}
             </div>
+            {/* Password */}
             <div>
               <div className='flex justify-between'>
                 <label htmlFor='password' className='text-sm mb-2'>
@@ -125,21 +164,28 @@ const SignUp = () => {
                 </label>
               </div>
               <input
+                {...register('password', {
+                  required: true,
+                  minLength: 6,
+                  pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+
+                })}
                 type='password'
-                name='password'
                 autoComplete='new-password'
                 id='password'
-                required
                 placeholder='*******'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-secondary bg-gray-200 text-gray-900'
               />
+              {errors.password?.type === 'required' && <p className='text-red-600'>Password is required</p>}
+              {errors.password?.type === 'minLength' && <p className='text-red-600'>Password is 6 character or longer</p>}
+              {errors.password?.type === 'pattern' && <p className='text-red-600'>Password must have one uppercase, one lowercase , one number and a special character!</p>}
             </div>
           </div>
 
           <div>
             <button
               type='submit'
-              className='bg-lime-500 w-full rounded-md py-3 text-white'
+              className='bg-secondary w-full rounded-md py-3 text-white'
             >
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
@@ -168,7 +214,7 @@ const SignUp = () => {
           Already have an account?{' '}
           <Link
             to='/login'
-            className='hover:underline hover:text-lime-500 text-gray-600'
+            className='hover:underline hover:text-secondary text-gray-600'
           >
             Login
           </Link>
@@ -178,5 +224,4 @@ const SignUp = () => {
     </div>
   )
 }
-
 export default SignUp

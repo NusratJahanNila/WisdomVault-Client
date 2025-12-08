@@ -1,174 +1,175 @@
 import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth"; // your context hook
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { imageUpload } from "../../utils";
+import axios from "axios";
 
 const categories = [
-  "Personal Growth",
-  "Career",
-  "Relationships",
-  "Mindset",
-  "Mistakes Learned",
+    "Personal Growth",
+    "Career",
+    "Relationships",
+    "Mindset",
+    "Mistakes Learned",
 ];
 
 const emotionalTones = [
-  "Motivational",
-  "Sad",
-  "Realization",
-  "Gratitude",
+    "Motivational",
+    "Sad",
+    "Realization",
+    "Gratitude",
 ];
 
 const AddLessonForm = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const axiosSecure = useAxiosSecure();
-  const { user } = useAuth(); 
+    const { register, handleSubmit, reset } = useForm();
+    const { user } = useAuth();
 
-  const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (data) => {
-    const {title,description,image,category,emotionalTone,privacy,accessLevel,}=data;
-    const imageFile = image[0];
-    try {
-      setLoading(true);
+    const onSubmit = async (data) => {
+        // data
+        const { title, description, image, category, emotionalTone, privacy, accessLevel, } = data;
 
-      const imageURL = await imageUpload(imageFile);
+        const imageFile = image[0];
 
-      const lessonData = {
-        title: title,
-        description: description,
-        image: imageURL || '',
-        category: category,
-        emotionalTone: emotionalTone,
-        privacy: privacy,
-        accessLevel: accessLevel, // force free for non-premium users
-        authorName: user?.displayName,
-        authorEmail: user?.email,
-        authorPhoto: user?.photoURL,
-        likesCount: 0,
-        favoritesCount: 0,
-        createdAt: new Date(),
-      };
+        try {
+            setLoading(true);
 
-    //   // Optional: handle image upload here if integrating external hosting.
-    //   // For now just skip file processing:
-    //   if (data.image?.[0]) {
-    //     lessonData.imageURL = URL.createObjectURL(data.image[0]); // preview only
-    //   }
+            const imageURL = await imageUpload(imageFile);
 
-      const res = await axiosSecure.post("/api/lessons", lessonData);
+            //   lesson data for backend
+            const lessonData = {
+                title: title,
+                description: description,
+                category: category,
+                emotionalTone: emotionalTone,
+                privacy: privacy,
+                accessLevel: accessLevel,
+                authorName: user?.displayName,
+                authorEmail: user?.email,
+                authorPhoto: user?.photoURL,
+                likesCount: 0,
+                favoritesCount: 0,
+                createdAt: new Date(),
+            };
+            //   console.table(lessonData)
+            if (data.image?.[0]) {
+                lessonData.image = imageURL
+            }
 
-      if (res.data.insertedId || res.data._id) {
-        Swal.fire({
-          icon: "success",
-          text: "Lesson posted successfully!",
-          timer: 1500,
-          showConfirmButton: false,
-        });
-        reset();
-      }
-    } catch (err) {
-      console.error(err);
-      Swal.fire({
-        icon: "error",
-        title: "Insert Failed",
-        text: "Could not submit lesson.",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/lessons`, lessonData);
 
-  return (
-    <div className="max-w-4xl mx-auto p-6 bg-base-100 rounded-xl shadow">
-      <h2 className="text-2xl font-bold mb-4">Create New Life Lesson</h2>
+            if (res.data.insertedId || res.data._id) {
+                Swal.fire({
+                    icon: "success",
+                    text: "Lesson posted successfully!",
+                    timer: 1500,
+                    showConfirmButton: false,
+                });
+                reset();
+            }
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                icon: "error",
+                title: "Insert Failed",
+                text: "Could not submit lesson.",
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        
-        {/* Title */}
-        <input
-          type="text"
-          placeholder="Lesson Title"
-          {...register("title", { required: true })}
-          className="input input-bordered w-full"
-        />
+    return (
+        <div className="max-w-4xl mx-auto p-6 bg-base-100 rounded-xl shadow">
+            <h2 className="text-2xl font-bold mb-4">Create New Life Lesson</h2>
 
-        {/* Description */}
-        <textarea
-          placeholder="Full Description, Story or Insight"
-          {...register("description", { required: true })}
-          className="textarea textarea-bordered w-full h-40"
-        ></textarea>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
-        {/* Category */}
-        <select
-          {...register("category", { required: true })}
-          className="select select-bordered w-full"
-        >
-          <option disabled selected>
-            Select Category
-          </option>
-          {categories.map((cat) => (
-            <option key={cat}>{cat}</option>
-          ))}
-        </select>
+                {/* Title */}
+                <input
+                    type="text"
+                    placeholder="Lesson Title"
+                    {...register("title", { required: true })}
+                    className="input input-bordered w-full"
+                />
 
-        {/* Emotional Tone */}
-        <select
-          {...register("emotionalTone", { required: true })}
-          className="select select-bordered w-full"
-        >
-          <option disabled selected>
-            Select Emotional Tone
-          </option>
-          {emotionalTones.map((tone) => (
-            <option key={tone}>{tone}</option>
-          ))}
-        </select>
+                {/* Description */}
+                <textarea
+                    placeholder="Full Description, Story or Insight"
+                    {...register("description", { required: true })}
+                    className="textarea textarea-bordered w-full h-40"
+                ></textarea>
 
-        {/* Image (optional) */}
-        <input
-          type="file"
-          {...register("image")}
-          className="file-input file-input-bordered w-full"
-        />
+                {/* Category */}
+                <select
+                    {...register("category", { required: true })}
+                    className="select select-bordered w-full"
+                >
+                    <option disabled selected>
+                        Select Category
+                    </option>
+                    {categories.map((cat) => (
+                        <option key={cat}>{cat}</option>
+                    ))}
+                </select>
 
-        {/* Privacy */}
-        <select
-          {...register("privacy", { required: true })}
-          className="select select-bordered w-full"
-        >
-          <option value="public">Public</option>
-          <option value="private">Private</option>
-        </select>
+                {/* Emotional Tone */}
+                <select
+                    {...register("emotionalTone", { required: true })}
+                    className="select select-bordered w-full"
+                >
+                    <option disabled selected>
+                        Select Emotional Tone
+                    </option>
+                    {emotionalTones.map((tone) => (
+                        <option key={tone}>{tone}</option>
+                    ))}
+                </select>
 
-        {/* Access Level (Free/Premium) */}
-        <div className="tooltip tooltip-right"
-        //   data-tip={!userData?.isPremium ? "Upgrade to Premium to create paid lessons" : ""}
-        >
-          <select
-            {...register("accessLevel")}
-            // disabled={!userData?.isPremium}
-            className="select select-bordered w-full"
-            defaultValue="free"
-          >
-            <option value="free">Free</option>
-            <option value="premium">Premium (Paid)</option>
-          </select>
+                {/* Image (optional) */}
+                <input
+                    type="file"
+                    {...register("image")}
+                    className="file-input file-input-bordered w-full"
+                />
+
+                {/* Privacy */}
+                <select
+                    {...register("privacy", { required: true })}
+                    className="select select-bordered w-full"
+                >
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+
+                {/* Access Level (Free/Premium) */}
+                <div className="tooltip tooltip-right"
+                //   data-tip={!userData?.isPremium ? "Upgrade to Premium to create paid lessons" : ""}
+                >
+                    <select
+                        {...register("accessLevel")}
+                        // disabled={!userData?.isPremium}
+                        className="select select-bordered w-full"
+                        defaultValue="free"
+                    >
+                        <option value="free">Free</option>
+                        <option value="premium">Premium (Paid)</option>
+                    </select>
+                </div>
+
+                {/* Submit */}
+                <button
+                    type="submit"
+                    className="btn btn-primary w-full mt-4"
+                    disabled={loading}
+                >
+                    {loading ? "Posting..." : "Submit Lesson"}
+                </button>
+            </form>
         </div>
-
-        {/* Submit */}
-        <button
-          type="submit"
-          className="btn btn-primary w-full mt-4"
-          disabled={loading}
-        >
-          {loading ? "Posting..." : "Submit Lesson"}
-        </button>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default AddLessonForm;

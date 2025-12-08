@@ -4,6 +4,7 @@ import LoadingSpinner from '../../components/Shared/LoadingSpinner'
 import useAuth from '../../hooks/useAuth'
 import { FcGoogle } from 'react-icons/fc'
 import { TbFidgetSpinner } from 'react-icons/tb'
+// import { saveOrUpdateUser } from '../../utils'
 
 const Login = () => {
   const { signIn, signInWithGoogle, loading, user, setLoading } = useAuth()
@@ -24,7 +25,15 @@ const Login = () => {
 
     try {
       //User Login
-      await signIn(email, password)
+      const result=await signIn(email, password)
+      console.log(result)
+
+      // save or update user via signup
+      // await saveOrUpdateUser({
+      //   name: result?.user?.displayName,
+      //   email: result?.user?.email,
+      //   image: result?.user?.photoURL
+      // })
 
       navigate(from, { replace: true })
       toast.success('Login Successful')
@@ -38,7 +47,17 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      await signInWithGoogle()
+      const result = await signInWithGoogle()
+      console.log(result)
+      
+      // save or update user via signup
+      // await saveOrUpdateUser({
+      //   name: result?.user?.displayName,
+      //   email: result?.user?.email,
+      //   image: result?.user?.photoURL
+      // })
+
+
       navigate(from, { replace: true })
       toast.success('Login Successful')
     } catch (err) {
@@ -98,7 +117,7 @@ const Login = () => {
           <div>
             <button
               type='submit'
-              className='bg-lime-500 w-full rounded-md py-3 text-white'
+              className='bg-secondary w-full rounded-md py-3 text-white'
             >
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
@@ -109,7 +128,7 @@ const Login = () => {
           </div>
         </form>
         <div className='space-y-1'>
-          <button className='text-xs hover:underline hover:text-lime-500 text-gray-400 cursor-pointer'>
+          <button className='text-xs hover:underline hover:text-secondary text-gray-400 cursor-pointer'>
             Forgot password?
           </button>
         </div>
@@ -133,7 +152,7 @@ const Login = () => {
           <Link
             state={from}
             to='/signup'
-            className='hover:underline hover:text-lime-500 text-gray-600'
+            className='hover:underline hover:text-secondary text-gray-600'
           >
             Sign up
           </Link>
