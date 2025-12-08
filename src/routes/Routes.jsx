@@ -3,8 +3,14 @@ import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
 import MainLayout from '../layouts/MainLayout'
+import DashboardLayout from '../layouts/DashboardLayout'
 import { createBrowserRouter } from 'react-router'
-
+import AddLesson from '../pages/Dashboard/User/AddLesson/AddLesson'
+import MyLesson from '../pages/Dashboard/User/MyLesson/MyLesson'
+import UpdateLesson from '../pages/Dashboard/User/UpdateLesson/UpdateLesson'
+import PrivateRoute from './PrivateRoute'
+import Profile from '../pages/Dashboard/Profile/Profile'
+import DashboardHome from '../pages/Dashboard/Common/DashboardHome'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -31,34 +37,35 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // {
-      //   index: true,
-      //   element: (
-      //     <PrivateRoute>
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: '/dashboard',
+        element: (
+          <PrivateRoute>
+            <DashboardHome></DashboardHome>
+          </PrivateRoute>
+        ),
+      },
       {
         path: 'add-lesson',
         element: (
           <PrivateRoute>
-            
+            <AddLesson></AddLesson>
           </PrivateRoute>
         ),
       },
       {
-        path: 'my-inventory',
+        path: 'my-lessons',
         element: (
           <PrivateRoute>
-            <MyInventory />
+            <MyLesson></MyLesson>
           </PrivateRoute>
         ),
       },
       {
-        path: 'manage-users',
+        path: 'update-lesson',
         element: (
           <PrivateRoute>
-            <ManageUsers />
+            <UpdateLesson></UpdateLesson>
           </PrivateRoute>
         ),
       },
@@ -70,18 +77,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: 'my-orders',
-        element: (
-          <PrivateRoute>
-            <MyOrders />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'manage-orders',
-        element: <ManageOrders />,
-      },
+      
     ],
   },
 ])

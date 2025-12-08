@@ -14,7 +14,7 @@ const Navbar = () => {
         <li><NavLink to={'/'} className={({ isActive }) => 
       `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
     }>Home</NavLink></li>
-        <li><NavLink to={'/'} className={({ isActive }) => 
+        <li><NavLink to={'/dashboard/add-lesson'} className={({ isActive }) => 
       `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
     }>Add Lesson</NavLink></li>
         <li><NavLink to={'/'} className={({ isActive }) => 
@@ -83,6 +83,23 @@ const Navbar = () => {
                                 {isOpen && (
                                     <div className='absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm'>
                                         <div className='flex flex-col cursor-pointer'>
+                                            <div
+                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                            >
+                                                {user?.displayName}
+                                            </div>
+                                            <Link
+                                                to={'/dashboard/profile'}
+                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                            >
+                                                Profile
+                                            </Link>
+                                            <Link
+                                                to={'/dashboard'}
+                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                            >
+                                                Dashboard
+                                            </Link>
                                             <div
                                                 onClick={logOut}
                                                 className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
