@@ -17,7 +17,7 @@ const Navbar = () => {
         <li><NavLink to={'/dashboard/add-lesson'} className={({ isActive }) => 
       `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
     }>Add Lesson</NavLink></li>
-        <li><NavLink to={'/'} className={({ isActive }) => 
+        <li><NavLink to={'/dashboard/my-lessons'} className={({ isActive }) => 
       `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
     }>My Lessons</NavLink></li>
         <li><NavLink to={'/'} className={({ isActive }) => 

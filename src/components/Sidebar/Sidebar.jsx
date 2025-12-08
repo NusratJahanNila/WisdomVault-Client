@@ -21,7 +21,7 @@ const Sidebar = () => {
                 </Link>
             </li>
             <li>
-                <Link className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Lesson">
+                <Link to={'/dashboard/my-lessons'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Lesson">
                     {/* icon */}
                     <FaListAlt className='text-primary'/>
                     <span className="is-drawer-close:hidden">My Lesson</span>
