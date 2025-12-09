@@ -3,19 +3,47 @@ import useAuth from '../../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure'
 import LoadingSpinner from '../../../../components/Shared/LoadingSpinner';
+import Swal from 'sweetalert2';
 
 const ManageUsers = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     // get all plants from the db
-    const { data: users = [], isLoading, } = useQuery({
+    const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users', user.email],
         queryFn: async () => {
             const result = await axiosSecure.get(`/users`)
             return result.data;
         }
     })
-    console.log('users data-->', users);
+
+    // delete user
+    const handleDelete = (email) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This user will be permanently deleted!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/users/${email}`)
+                    .then(res => {
+                        console.log('after delete: ', res.data);
+                        if (res.data.deletedCount) {
+                            // refresh data on ui
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "User has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
+    };
 
     // loading
     if (isLoading) return <LoadingSpinner />
@@ -46,7 +74,7 @@ const ManageUsers = () => {
                                     <td>{user.role}</td>
                                     <td>{user.lessonCount}</td>
 
-                                    
+
 
                                     {/* Actions */}
                                     <td className="flex gap-2">
@@ -59,7 +87,7 @@ const ManageUsers = () => {
 
                                         <button
                                             className="btn btn-xs btn-error text-white"
-                                        // onClick={() => handleDelete(lesson._id)}
+                                            onClick={() => handleDelete(user.email)}
                                         >
                                             Delete
                                         </button>
