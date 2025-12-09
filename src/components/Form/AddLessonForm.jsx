@@ -32,11 +32,14 @@ const AddLessonForm = () => {
         const { title, description, image, category, emotionalTone, privacy, accessLevel, } = data;
 
         const imageFile = image[0];
+        let imageURL = ''
 
         try {
             setLoading(true);
 
-            const imageURL = await imageUpload(imageFile);
+            if (imageFile) {
+                imageURL = await imageUpload(imageFile);
+            }
 
             //   lesson data for backend
             const lessonData = {
@@ -56,6 +59,9 @@ const AddLessonForm = () => {
             //   console.table(lessonData)
             if (data.image?.[0]) {
                 lessonData.image = imageURL
+            }
+            else{
+                lessonData.image= null;
             }
 
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/lessons`, lessonData);

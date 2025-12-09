@@ -21,69 +21,68 @@ const emotionalTones = [
     "Gratitude",
 ];
 
-const UpdateLessonModal = ({ closeModal, isOpen ,lesson ,refetch}) => {
+const UpdateLessonModal = ({ closeModal, isOpen, lesson, refetch }) => {
     const { register, handleSubmit, reset } = useForm();
-    
-        const [loading,setLoading] = useState(false);
 
-        const onSubmit = async (data) => {
-                // data
-                const { title, description, image, category, emotionalTone, privacy, accessLevel, } = data;
-        
-                const imageFile = image[0];
-                let imageURL=''
-                console.log(imageFile)
-                try {
-                    setLoading(true);
-                    if(imageFile){
+    const [loading, setLoading] = useState(false);
 
-                         imageURL = await imageUpload(imageFile);
-                    }
-        
-                    //   lesson data for backend
-                    const lessonData = {
-                        title: title,
-                        description: description,
-                        category: category,
-                        emotionalTone: emotionalTone,
-                        privacy: privacy,
-                        accessLevel: accessLevel,
-                        last_update_at: new Date(),
-                    };
-                    //   console.table(lessonData)
-                    if (data.image?.[0]) {
-                        lessonData.image = imageURL
-                    }
-                    else{
-                        lessonData.image=image;
-                    }
-        
-                    const res = await axios.patch(`${import.meta.env.VITE_API_URL}/my-lesson/${lesson._id}`, lessonData);
-        
-                    if (res.data.modifiedCount) {
-                        refetch()
-                        Swal.fire({
-                            icon: "success",
-                            text: "Lesson updated successfully!",
-                            timer: 1500,
-                            showConfirmButton: false,
-                        });
-                        reset();
-                        closeModal();
-                    }
-                } catch (err) {
-                    console.error(err);
-                    Swal.fire({
-                        icon: "error",
-                        title: "Update Failed",
-                        text: "Could not update lesson.",
-                    });
-                    reset(),
-                    closeModal()
-                } finally {
-                    setLoading(false);
-                }
+    const onSubmit = async (data) => {
+        // data
+        const { title, description, image, category, emotionalTone, privacy, accessLevel, } = data;
+
+        const imageFile = image[0];
+        let imageURL = ''
+        console.log(imageFile)
+        try {
+            setLoading(true);
+            if (imageFile) {
+                imageURL = await imageUpload(imageFile);
+            }
+
+            //   lesson data for backend
+            const lessonData = {
+                title: title,
+                description: description,
+                category: category,
+                emotionalTone: emotionalTone,
+                privacy: privacy,
+                accessLevel: accessLevel,
+                last_update_at: new Date(),
             };
+            //   console.table(lessonData)
+            if (data.image?.[0]) {
+                lessonData.image = imageURL
+            }
+            else {
+                lessonData.image = image;
+            }
+
+            const res = await axios.patch(`${import.meta.env.VITE_API_URL}/my-lesson/${lesson._id}`, lessonData);
+
+            if (res.data.modifiedCount) {
+                refetch()
+                Swal.fire({
+                    icon: "success",
+                    text: "Lesson updated successfully!",
+                    timer: 1500,
+                    showConfirmButton: false,
+                });
+                reset();
+                closeModal();
+            }
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                icon: "error",
+                title: "Update Failed",
+                text: "Could not update lesson.",
+            });
+            reset(),
+                closeModal()
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <Dialog
             open={isOpen}
