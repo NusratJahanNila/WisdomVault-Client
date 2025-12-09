@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogPanel } from '@headlessui/react'
 import { useForm } from 'react-hook-form';
-import useAuth from '../../../../hooks/useAuth';
 import { imageUpload } from '../../../../utils';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -22,9 +21,8 @@ const emotionalTones = [
     "Gratitude",
 ];
 
-const UpdateLessonModal = ({ closeModal, isOpen ,lesson }) => {
+const UpdateLessonModal = ({ closeModal, isOpen ,lesson ,refetch}) => {
     const { register, handleSubmit, reset } = useForm();
-        const { user } = useAuth();
     
         const [loading,setLoading] = useState(false);
 
@@ -33,11 +31,14 @@ const UpdateLessonModal = ({ closeModal, isOpen ,lesson }) => {
                 const { title, description, image, category, emotionalTone, privacy, accessLevel, } = data;
         
                 const imageFile = image[0];
-        
+                let imageURL=''
+                console.log(imageFile)
                 try {
                     setLoading(true);
-        
-                    const imageURL = await imageUpload(imageFile);
+                    if(imageFile){
+
+                         imageURL = await imageUpload(imageFile);
+                    }
         
                     //   lesson data for backend
                     const lessonData = {
@@ -47,21 +48,20 @@ const UpdateLessonModal = ({ closeModal, isOpen ,lesson }) => {
                         emotionalTone: emotionalTone,
                         privacy: privacy,
                         accessLevel: accessLevel,
-                        authorName: user?.displayName,
-                        authorEmail: user?.email,
-                        authorPhoto: user?.photoURL,
-                        likesCount: 0,
-                        favoritesCount: 0,
-                        createdAt: new Date(),
+                        last_update_at: new Date(),
                     };
                     //   console.table(lessonData)
                     if (data.image?.[0]) {
                         lessonData.image = imageURL
                     }
+                    else{
+                        lessonData.image=image;
+                    }
         
-                    const res = await axios.post(`${import.meta.env.VITE_API_URL}/lessons`, lessonData);
+                    const res = await axios.patch(`${import.meta.env.VITE_API_URL}/my-lesson/${lesson._id}`, lessonData);
         
-                    if (res.data.insertedId || res.data._id) {
+                    if (res.data.modifiedCount) {
+                        refetch()
                         Swal.fire({
                             icon: "success",
                             text: "Lesson updated successfully!",
@@ -69,14 +69,17 @@ const UpdateLessonModal = ({ closeModal, isOpen ,lesson }) => {
                             showConfirmButton: false,
                         });
                         reset();
+                        closeModal();
                     }
                 } catch (err) {
                     console.error(err);
                     Swal.fire({
                         icon: "error",
-                        title: "Insert Failed",
-                        text: "Could not submit lesson.",
+                        title: "Update Failed",
+                        text: "Could not update lesson.",
                     });
+                    reset(),
+                    closeModal()
                 } finally {
                     setLoading(false);
                 }

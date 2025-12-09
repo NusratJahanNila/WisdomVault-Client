@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import UpdateLessonModal from './UpdateLessonModal';
 
-const UpdateLesson = ({ lesson }) => {
+const UpdateLesson = ({ lesson ,refetch}) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const closeModal = () => {
@@ -20,7 +20,12 @@ const UpdateLesson = ({ lesson }) => {
             >
                 Update
             </button>
-            <UpdateLessonModal closeModal={closeModal} isOpen={isOpen} lesson={lesson}></UpdateLessonModal>
+            <UpdateLessonModal 
+            closeModal={closeModal} 
+            isOpen={isOpen} 
+            lesson={lesson}
+            refetch={refetch}
+            ></UpdateLessonModal>
         </>
 
     );

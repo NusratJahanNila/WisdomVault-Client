@@ -31,6 +31,7 @@ const MyLesson = () => {
     //     // TODO: PATCH /lessons/:id { accessLevel: "..." }
     //   };
 
+    // delete
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -138,7 +139,7 @@ const MyLesson = () => {
                                             Details
                                         </button>
 
-                                        <UpdateLesson lesson={lesson} />
+                                        <UpdateLesson lesson={lesson} refetch={refetch}/>
 
                                         <button
                                             className="btn btn-xs btn-error text-white"
