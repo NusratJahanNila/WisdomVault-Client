@@ -10,7 +10,7 @@ import MyLesson from '../pages/Dashboard/User/MyLesson/MyLesson'
 import PrivateRoute from './PrivateRoute'
 import Profile from '../pages/Dashboard/Profile/Profile'
 import DashboardHome from '../pages/Dashboard/Common/DashboardHome'
-import ManageLesson from '../pages/Dashboard/Admin/ManageLesson/ManageLesson'
+import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers'
 import PublicLessons from '../pages/PublicLessons/PublicLessons'
 export const router = createBrowserRouter([
   {
@@ -64,10 +64,10 @@ export const router = createBrowserRouter([
       },
       // admin routes
       {
-        path: 'manage-lessons',
+        path: 'manage-users',
         element: (
           <PrivateRoute>
-            <ManageLesson></ManageLesson>
+            <ManageUsers></ManageUsers>
           </PrivateRoute>
         ),
       },
