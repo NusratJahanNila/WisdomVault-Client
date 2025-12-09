@@ -1,97 +1,97 @@
-// // import { useNavigate } from "react-router";
-// // import useAuth from "../../hooks/useAuth";
-// import { FiLock } from "react-icons/fi";
+// import { useNavigate } from "react-router";
+import useRole from "../../../hooks/useRole";
+import { FiLock } from "react-icons/fi";
+import LoadingSpinner from "../../Shared/LoadingSpinner";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 
-// const LessonCard = () => {
-// //   const navigate = useNavigate();
-//   const { userData } = useAuth(); // contains isPremium info from DB
+const LessonCard = () => {
+    //   const navigate = useNavigate();
+    const { userData, isRoleLoading } = useRole();
 
-//   // Static Dummy Data (replace with props later)
-//   const lesson = {
-//     _id: "111aaa",
-//     title: "Lesson from Failure",
-//     description:
-//       "When you fail, you learn the most important truths about yourself...",
-//     category: "Personal Growth",
-//     emotionalTone: "Realization",
-//     accessLevel: "premium", // premium or free
-//     authorPhoto:
-//       "https://i.pravatar.cc/80?img=10",
-//     authorName: "John Doe",
-//     createdAt: "2025-02-01",
-//   };
+    // get my all lessons from the db
+    const { data: lessons = [] } = useQuery({
+        queryKey: ['lessons'],
+        queryFn: async () => {
+            const result = await axios.get(`${import.meta.env.VITE_API_URL}/lessons`)
+            return result.data;
+        }
+    })
 
-//   const isLocked =
-//     lesson.accessLevel === "premium" && !userData?.isPremium;
+    const handleDetails = () => {
+        console.log("show lesson details");
+        // TODO: navigate(`/lessons/${lesson._id}`);
+    };
 
-//   const handleDetails = () => {
-//     console.log("show lesson details");
-//     // TODO: navigate(`/lessons/${lesson._id}`);
-//   };
+    if (isRoleLoading) return <LoadingSpinner />
+    return (
+        < >
+            {
+                lessons?.map(lesson => <div
+                    key={lesson._id}
+                    className={`relative card bg-base-100 shadow-xl border p-4 transition ${(lesson.accessLevel === "premium" && !userData?.isPremium) ? "opacity-10 blur-[2px] pointer-events-none" : ""
+                        }`}
+                >
+                    {/* Premium Lock Overlay */}
+                    {(lesson.accessLevel === "premium" && !userData?.isPremium) && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 text-white rounded-xl backdrop-blur-sm z-20">
+                            <FiLock size={28} />
+                            <p className="font-semibold text-center">
+                                Premium Lesson — Upgrade to view
+                            </p>
+                        </div>
+                    )}
 
-//   return (
-//     <div
-//       className={`relative card bg-base-100 shadow-xl border p-4 transition ${
-//         isLocked ? "opacity-50 blur-[2px] pointer-events-none" : ""
-//       }`}
-//     >
-//       {/* Premium Lock Overlay */}
-//       {isLocked && (
-//         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 text-white rounded-xl backdrop-blur-sm z-20">
-//           <FiLock size={28} />
-//           <p className="font-semibold text-center">
-//             Premium Lesson — Upgrade to view
-//           </p>
-//         </div>
-//       )}
 
-//       <div className="flex items-start gap-4">
-//         {/* Author photo */}
-//         <img
-//           src={lesson.authorPhoto}
-//           alt={lesson.authorName}
-//           className="w-14 h-14 object-cover rounded-full border shadow"
-//         />
+                    <div className="flex items-start gap-4">
+                        {/* Author photo */}
+                        <img
+                            src={lesson.authorPhoto}
+                            alt={lesson.authorName}
+                            className="w-14 h-14 object-cover rounded-full border shadow"
+                        />
 
-//         {/* Content */}
-//         <div className="flex-1 space-y-1">
-//           <h2 className="font-bold text-lg">{lesson.title}</h2>
-//           <p className="text-sm text-gray-600">
-//             {lesson.description.substring(0, 80)}...
-//           </p>
+                        {/* Content */}
+                        <div className="flex-1 space-y-1">
+                            <h2 className="font-bold text-lg">{lesson.title}</h2>
+                            <p className="text-sm text-gray-600">
+                                {lesson.description.substring(0, 80)}...
+                            </p>
 
-//           <div className="flex flex-wrap gap-2 text-xs mt-2">
-//             <span className="badge badge-primary">{lesson.category}</span>
-//             <span className="badge badge-secondary">{lesson.emotionalTone}</span>
-//             <span
-//               className={`badge ${
-//                 lesson.accessLevel === "premium"
-//                   ? "badge-error"
-//                   : "badge-success"
-//               }`}
-//             >
-//               {lesson.accessLevel}
-//             </span>
-//           </div>
+                            <div className="flex flex-wrap gap-2 text-xs mt-2">
+                                <span className="badge badge-primary">{lesson.category}</span>
+                                <span className="badge badge-secondary">{lesson.emotionalTone}</span>
+                                <span
+                                    className={`badge ${lesson.accessLevel === "premium"
+                                        ? "badge-error"
+                                        : "badge-success"
+                                        }`}
+                                >
+                                    {lesson.accessLevel}
+                                </span>
+                            </div>
 
-//           {/* Creator Info */}
-//           <p className="text-xs text-gray-500">
-//             by <span className="font-semibold">{lesson.authorName}</span> ·{" "}
-//             {lesson.createdAt}
-//           </p>
+                            {/* Creator Info */}
+                            <p className="text-xs text-gray-500">
+                                by <span className="font-semibold">{lesson.authorName}</span> ·{" "}
+                                {lesson.createdAt}
+                            </p>
 
-//           {/* Action */}
-//           <button
-//             onClick={handleDetails}
-//             className="btn btn-sm btn-outline btn-primary mt-2"
-//           >
-//             See Details
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+                            {/* Action */}
+                            <button
+                                onClick={handleDetails}
+                                className="btn btn-sm btn-outline btn-primary mt-2"
+                            >
+                                See Details
+                            </button>
+                        </div>
+                    </div>
+                </div>)
+            }
+        </>
 
-// export default LessonCard;
+    );
+};
+
+export default LessonCard;

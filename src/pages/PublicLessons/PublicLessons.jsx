@@ -1,12 +1,15 @@
 import React from 'react';
 import Lessons from '../../components/Home/Lessons/Lessons';
+import Container from '../../components/Shared/Container';
 
 const PublicLessons = () => {
     return (
-        <div>
+        <Container>
             <h2>Public Lessons</h2>
-            <Lessons></Lessons>
-        </div>
+            <div className="py-10">
+                <Lessons></Lessons>
+            </div>
+        </Container>
     );
 };
 

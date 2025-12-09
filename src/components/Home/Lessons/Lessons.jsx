@@ -1,11 +1,11 @@
 import React from 'react';
-// import LessonCard from './LessonCard';
+import LessonCard from './LessonCard';
 
 const Lessons = () => {
     return (
         <div>
-            <div className="grid grid-cols-3 sm:grid-cols-1">
-                {/* <LessonCard></LessonCard> */}
+            <div className="grid md:grid-cols-3 grid-cols-1 gap-3">
+                <LessonCard></LessonCard>
             </div>
         </div>
     );

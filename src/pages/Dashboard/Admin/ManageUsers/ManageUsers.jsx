@@ -10,8 +10,12 @@ const ManageUsers = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     // update modal
-    let [isOpen, setIsOpen] = useState(false)
-    const closeModal = () => setIsOpen(false)
+    const [selectedUser, setSelectedUser] = useState(null);
+    const isOpen = !!selectedUser; // Modal is open if a user is selected
+    
+    const openModal = (user) => setSelectedUser(user);
+    const closeModal = () => setSelectedUser(null);
+
     // get all plants from the db
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users', user.email],
@@ -83,18 +87,12 @@ const ManageUsers = () => {
                                     {/* Actions */}
                                     <td className="flex gap-2">
                                         <button
-                                            onClick={() => setIsOpen(true)}
+                                            onClick={() => openModal(user)}
                                             className="btn btn-xs bg-secondary text-white"
-
                                         >
                                             Update Role
                                         </button>
-                                        <UpdateUserRole
-                                            user={user}
-                                            refetch={refetch}
-                                            isOpen={isOpen}
-                                            closeModal={closeModal}
-                                        />
+                                        
 
                                         <button
                                             className="btn btn-xs btn-error text-white"
@@ -109,6 +107,14 @@ const ManageUsers = () => {
                     </table>
                 </div>
             </div>
+            {selectedUser && (
+                <UpdateUserRole
+                    user={selectedUser}
+                    refetch={refetch}
+                    isOpen={isOpen}
+                    closeModal={closeModal}
+                />
+            )}
         </div>
     );
 };
