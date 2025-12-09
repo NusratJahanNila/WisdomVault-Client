@@ -20,7 +20,7 @@ const UpdateLesson = ({ lesson }) => {
             >
                 Update
             </button>
-            <UpdateLessonModal closeModal={closeModal} isOpen={isOpen}></UpdateLessonModal>
+            <UpdateLessonModal closeModal={closeModal} isOpen={isOpen} lesson={lesson}></UpdateLessonModal>
         </>
 
     );

@@ -22,7 +22,7 @@ const emotionalTones = [
     "Gratitude",
 ];
 
-const UpdateLessonModal = ({ closeModal, isOpen }) => {
+const UpdateLessonModal = ({ closeModal, isOpen ,lesson }) => {
     const { register, handleSubmit, reset } = useForm();
         const { user } = useAuth();
     
@@ -110,6 +110,7 @@ const UpdateLessonModal = ({ closeModal, isOpen }) => {
                                 placeholder="Lesson Title"
                                 {...register("title", { required: true })}
                                 className="input input-bordered w-full"
+                                defaultValue={lesson?.title}
                             />
 
                             {/* Description */}
@@ -117,12 +118,14 @@ const UpdateLessonModal = ({ closeModal, isOpen }) => {
                                 placeholder="Full Description, Story or Insight"
                                 {...register("description", { required: true })}
                                 className="textarea textarea-bordered w-full h-40"
+                                defaultValue={lesson?.description}
                             ></textarea>
 
                             {/* Category */}
                             <select
                                 {...register("category", { required: true })}
                                 className="select select-bordered w-full"
+                                defaultValue={lesson?.category}
                             >
                                 <option disabled selected>
                                     Select Category
@@ -136,6 +139,7 @@ const UpdateLessonModal = ({ closeModal, isOpen }) => {
                             <select
                                 {...register("emotionalTone", { required: true })}
                                 className="select select-bordered w-full"
+                                defaultValue={lesson?.emotionalTone}
                             >
                                 <option disabled selected>
                                     Select Emotional Tone
@@ -156,6 +160,7 @@ const UpdateLessonModal = ({ closeModal, isOpen }) => {
                             <select
                                 {...register("privacy", { required: true })}
                                 className="select select-bordered w-full"
+                                defaultValue={lesson?.privacy}
                             >
                                 <option value="public">Public</option>
                                 <option value="private">Private</option>
@@ -169,7 +174,7 @@ const UpdateLessonModal = ({ closeModal, isOpen }) => {
                                     {...register("accessLevel")}
                                     // disabled={!userData?.isPremium}
                                     className="select select-bordered w-full"
-                                    defaultValue="free"
+                                    defaultValue={lesson.accessLevel}
                                 >
                                     <option value="free">Free</option>
                                     <option value="premium">Premium (Paid)</option>

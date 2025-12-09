@@ -9,7 +9,7 @@ import LoadingSpinner from '../../../../components/Shared/LoadingSpinner';
 const MyLesson = () => {
     const { user } = useAuth();
     // get my all lessons from the db
-    const { data: lessons = [], isLoading } = useQuery({
+    const { data: lessons = [], isLoading ,refetch} = useQuery({
         queryKey: ['lessons', user.email],
         queryFn: async () => {
             const result = await axios.get(`${import.meta.env.VITE_API_URL}/my-lessons/${user?.email}`)
@@ -41,9 +41,19 @@ const MyLesson = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log("Delete:", id);
-                // TODO: DELETE /lessons/:id
-                Swal.fire("Deleted!", "Lesson has been removed.", "success");
+                axios.delete(`${import.meta.env.VITE_API_URL}/my-lesson/${id}`)
+                .then(res => {
+                        console.log('after delete: ', res.data);
+                        if (res.data.deletedCount) {
+                            // refresh data on ui
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your lesson has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
             }
         });
     };
