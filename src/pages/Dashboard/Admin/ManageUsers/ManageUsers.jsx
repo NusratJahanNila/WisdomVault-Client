@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure'
 import LoadingSpinner from '../../../../components/Shared/LoadingSpinner';
 import Swal from 'sweetalert2';
+import UpdateUserRole from './UpdateUserRole';
 
 const ManageUsers = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    // update modal
+    let [isOpen, setIsOpen] = useState(false)
+    const closeModal = () => setIsOpen(false)
     // get all plants from the db
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users', user.email],
@@ -79,11 +83,18 @@ const ManageUsers = () => {
                                     {/* Actions */}
                                     <td className="flex gap-2">
                                         <button
+                                            onClick={() => setIsOpen(true)}
                                             className="btn btn-xs bg-secondary text-white"
 
                                         >
                                             Update Role
                                         </button>
+                                        <UpdateUserRole
+                                            user={user}
+                                            refetch={refetch}
+                                            isOpen={isOpen}
+                                            closeModal={closeModal}
+                                        />
 
                                         <button
                                             className="btn btn-xs btn-error text-white"
