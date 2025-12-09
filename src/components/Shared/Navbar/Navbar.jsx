@@ -112,20 +112,20 @@ const Navbar = () => {
                             </div>
                         </>
                     ) : (
-                        <>
+                        <div className='space-x-1.5'>
                             <Link
                                 to='/login'
-                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold btn'
+                                className='btn bg-secondary text-white hover:bg-teal-700'
                             >
                                 Login
                             </Link>
                             <Link
                                 to='/signup'
-                                className='btn px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                className='btn bg-secondary text-white hover:bg-teal-700'
                             >
                                 Sign Up
                             </Link>
-                        </>
+                        </div>
                     )}
 
                 </div>

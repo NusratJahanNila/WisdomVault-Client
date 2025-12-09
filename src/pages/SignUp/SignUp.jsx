@@ -3,7 +3,7 @@ import { FcGoogle } from 'react-icons/fc'
 import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
-import { imageUpload,  } from '../../utils'
+import { imageUpload, saveOrUpdateUser } from '../../utils'
 import { useForm } from 'react-hook-form'
 
 const SignUp = () => {
@@ -34,7 +34,7 @@ const SignUp = () => {
       const result = await createUser(email, password)
 
       // save or update user via signup
-      // await saveOrUpdateUser({ name, email, image: imageURL })
+      await saveOrUpdateUser({ name, email, image: imageURL })
 
 
       //3. Save username & profile photo
@@ -60,11 +60,11 @@ const SignUp = () => {
       console.log(result)
 
       // save or update user via signup
-      // await saveOrUpdateUser({
-      //   name: result?.user?.displayName,
-      //   email: result?.user?.email,
-      //   image: result?.user?.photoURL
-      // })
+      await saveOrUpdateUser({
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+        image: result?.user?.photoURL
+      })
 
       navigate(from, { replace: true })
       toast.success('Signup Successful')
