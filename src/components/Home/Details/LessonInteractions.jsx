@@ -1,8 +1,8 @@
 import { useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
-// Optional icons - replace if you want
-import { Heart, Bookmark, Flag, Share2 } from "lucide-react";
+import { FaBookmark, FaHeart, FaShare } from "react-icons/fa";
+import { LuFlagTriangleRight } from "react-icons/lu";
 
 const LessonInteractions = ({ lesson }) => {
   const { user } = useAuth();
@@ -87,7 +87,7 @@ const LessonInteractions = ({ lesson }) => {
         onClick={handleLike}
         className={`btn btn-sm ${isLiked ? "btn-error text-white" : "btn-outline"}`}
       >
-        <Heart size={18} className={isLiked ? "fill-white" : ""} />
+        <FaHeart size={18} className={isLiked ? "fill-white" : ""} />
         {likesCount}
       </button>
 
@@ -96,7 +96,7 @@ const LessonInteractions = ({ lesson }) => {
         onClick={handleFavorite}
         className={`btn btn-sm ${isSaved ? "btn-warning" : "btn-outline"}`}
       >
-        <Bookmark size={18} className={isSaved ? "fill-white" : ""} />
+        <FaBookmark size={18} className={isSaved ? "fill-white" : ""} />
         {favoritesCount}
       </button>
 
@@ -105,7 +105,7 @@ const LessonInteractions = ({ lesson }) => {
         onClick={handleReport}
         className="btn btn-sm btn-outline btn-error"
       >
-        <Flag size={18} />
+        <LuFlagTriangleRight  size={18} />
         Report
       </button>
 
@@ -114,7 +114,7 @@ const LessonInteractions = ({ lesson }) => {
         onClick={handleShare}
         className="btn btn-sm btn-outline"
       >
-        <Share2 size={18} />
+        <FaShare size={18} />
         Share
       </button>
 

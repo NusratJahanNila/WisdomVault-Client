@@ -12,6 +12,7 @@ import Profile from '../pages/Dashboard/Profile/Profile'
 import DashboardHome from '../pages/Dashboard/Common/DashboardHome'
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers'
 import PublicLessons from '../pages/PublicLessons/PublicLessons'
+import LessonDetails from '../pages/LessonDetails/LessonDetails'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: '/public-lessons',
         element:<PublicLessons />
+      },
+      {
+        path: '/lesson-details/:id',
+        element: <LessonDetails></LessonDetails>
       }
     ],
   },

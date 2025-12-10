@@ -1,13 +1,12 @@
-// import { useNavigate } from "react-router";
 import useRole from "../../../hooks/useRole";
 import { FiLock } from "react-icons/fi";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Link } from "react-router";
 
 
 const LessonCard = () => {
-    //   const navigate = useNavigate();
     const { userData, isRoleLoading } = useRole();
 
     // get my all lessons from the db
@@ -19,10 +18,6 @@ const LessonCard = () => {
         }
     })
 
-    const handleDetails = () => {
-        console.log("show lesson details");
-        // TODO: navigate(`/lessons/${lesson._id}`);
-    };
 
     if (isRoleLoading) return <LoadingSpinner />
     return (
@@ -79,12 +74,12 @@ const LessonCard = () => {
                             </p>
 
                             {/* Action */}
-                            <button
-                                onClick={handleDetails}
+                            <Link
+                                to={`/lesson-details/${lesson._id}`}
                                 className="btn btn-sm btn-outline btn-primary mt-2"
                             >
                                 See Details
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>)
