@@ -13,6 +13,7 @@ import DashboardHome from '../pages/Dashboard/Common/DashboardHome'
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers'
 import PublicLessons from '../pages/PublicLessons/PublicLessons'
 import LessonDetails from '../pages/LessonDetails/LessonDetails'
+import AuthorProfile from '../components/AuthorProfile/AuthorProfile'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: '/lesson-details/:id',
         element: <LessonDetails></LessonDetails>
+      },
+      {
+        path:"/author-profile/:authorEmail",
+        element: <AuthorProfile></AuthorProfile>
       }
     ],
   },

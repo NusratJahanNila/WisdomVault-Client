@@ -5,19 +5,24 @@ import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../../../hooks/useAuth';
 import axios from 'axios';
 import LoadingSpinner from '../../../../components/Shared/LoadingSpinner';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import useRole from '../../../../hooks/useRole';
+import { Link } from 'react-router';
 
 const MyLesson = () => {
     const { user } = useAuth();
+    const { userData } = useRole();
+    const axiosSecure = useAxiosSecure();
     // get my all lessons from the db
-    const { data: lessons = [], isLoading ,refetch} = useQuery({
+    const { data: lessons = [], isLoading, refetch } = useQuery({
         queryKey: ['lessons', user.email],
         queryFn: async () => {
-            const result = await axios.get(`${import.meta.env.VITE_API_URL}/my-lessons/${user?.email}`)
+            const result = await axiosSecure.get(`/my-lessons/${user?.email}`)
             return result.data;
         }
     })
     // loading
-  if(isLoading) return <LoadingSpinner/>
+    if (isLoading) return <LoadingSpinner />
 
     // Handlers (to connect later with API)
     const handleTogglePrivacy = (id) => {
@@ -25,11 +30,11 @@ const MyLesson = () => {
         // TODO: PATCH /lessons/:id { privacy: "..." }
     };
 
-    //   const handleToggleAccess = (id) => {
-    //     if (!userData?.isPremium) return;
-    //     console.log("Toggle access level for:", id);
-    //     // TODO: PATCH /lessons/:id { accessLevel: "..." }
-    //   };
+    const handleToggleAccess = (id) => {
+        if (!userData?.isPremium) return;
+        console.log("Toggle access level for:", id);
+        //     // TODO: PATCH /lessons/:id { accessLevel: "..." }
+    };
 
     // delete
     const handleDelete = (id) => {
@@ -43,7 +48,7 @@ const MyLesson = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete(`${import.meta.env.VITE_API_URL}/my-lesson/${id}`)
-                .then(res => {
+                    .then(res => {
                         console.log('after delete: ', res.data);
                         if (res.data.deletedCount) {
                             // refresh data on ui
@@ -57,13 +62,6 @@ const MyLesson = () => {
                     })
             }
         });
-    };
-
-
-
-    const handleDetails = (id) => {
-        console.log("View details:", id);
-        // TODO: navigate(`/lessons/${id}`)
     };
 
 
@@ -110,19 +108,19 @@ const MyLesson = () => {
                                     <td>
                                         <button
                                             className="btn btn-xs"
-                                        // disabled={!userData?.isPremium}
-                                        // onClick={() => handleToggleAccess(lesson._id)}
+                                            disabled={!userData?.isPremium}
+                                            onClick={() => handleToggleAccess(lesson._id)}
                                         >
                                             {lesson.accessLevel === "free"
                                                 ? "Free"
                                                 : "Premium 💎"}
                                         </button>
 
-                                        {/* {!userData?.isPremium && (
-                    <div className="text-xs text-warning">
-                      Premium only
-                    </div>
-                  )} */}
+                                        {!userData?.isPremium && (
+                                            <div className="text-xs text-warning">
+                                                Premium only
+                                            </div>
+                                        )}
                                     </td>
 
                                     {/* Stats */}
@@ -132,14 +130,14 @@ const MyLesson = () => {
 
                                     {/* Actions */}
                                     <td className="flex gap-2">
-                                        <button
+                                        <Link
                                             className="btn btn-xs bg-secondary text-white"
-                                            onClick={() => handleDetails(lesson._id)}
+                                            to={`/lesson-details/${lesson._id}`}
                                         >
                                             Details
-                                        </button>
+                                        </Link>
 
-                                        <UpdateLesson lesson={lesson} refetch={refetch}/>
+                                        <UpdateLesson lesson={lesson} refetch={refetch} />
 
                                         <button
                                             className="btn btn-xs btn-error text-white"

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { imageUpload } from "../../utils";
 import axios from "axios";
+import useRole from "../../hooks/useRole";
 
 const categories = [
     "Personal Growth",
@@ -24,6 +25,7 @@ const emotionalTones = [
 const AddLessonForm = () => {
     const { register, handleSubmit, reset } = useForm();
     const { user } = useAuth();
+    const { userData } = useRole();
 
     const [loading, setLoading] = useState(false);
 
@@ -134,7 +136,7 @@ const AddLessonForm = () => {
                     ))}
                 </select>
 
-                {/* Image (optional) */}
+                {/* Image */}
                 <input
                     type="file"
                     {...register("image")}
@@ -152,11 +154,11 @@ const AddLessonForm = () => {
 
                 {/* Access Level (Free/Premium) */}
                 <div className="tooltip tooltip-right"
-                //   data-tip={!userData?.isPremium ? "Upgrade to Premium to create paid lessons" : ""}
+                  data-tip={!userData?.isPremium ? "Upgrade to Premium to create paid lessons" : ""}
                 >
                     <select
                         {...register("accessLevel")}
-                        // disabled={!userData?.isPremium}
+                        disabled={!userData?.isPremium}
                         className="select select-bordered w-full"
                         defaultValue="free"
                     >
