@@ -19,9 +19,9 @@ const LessonDetails = () => {
   const {id}=useParams();
   console.log(id)
 
-  // get plant data
+  // get lesson data
   const {data: lesson={}, isLoading}=useQuery({
-    queryKey: ['plant',id],
+    queryKey: ['lesson',id],
     queryFn:async()=>{
       const result=await axios.get(`${import.meta.env.VITE_API_URL}/lesson-details/${id}`)
       return result.data;
