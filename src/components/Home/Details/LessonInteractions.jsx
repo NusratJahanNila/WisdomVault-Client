@@ -1,10 +1,11 @@
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { FaBookmark, FaHeart, FaShare } from "react-icons/fa";
+import {  FaHeart, FaShare } from "react-icons/fa";
 import { LuFlagTriangleRight } from "react-icons/lu";
 import { useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Favorites from "./lessonInteraction/Favorites";
 
 const LessonInteractions = ({ lesson , refetch}) => {
   const { user } = useAuth();
@@ -12,9 +13,8 @@ const LessonInteractions = ({ lesson , refetch}) => {
   const axiosSecure = useAxiosSecure();
 
   const [liked, setLiked] = useState(lesson.likes?.includes(user?.email) || false);
-  const [isSaved, setIsSaved] = useState(false);
+
   const [likesCount, setLikesCount] = useState(lesson.likesCount || 0);
-  const [favoritesCount, setFavoritesCount] = useState(lesson.favoritesCount || 0);
   // Like
   const handleLike = async () => {
     if (!user) {
@@ -30,7 +30,7 @@ const LessonInteractions = ({ lesson , refetch}) => {
 
     try {
       await axiosSecure.post(`/lesson/${lesson._id}/like`, {
-        userId: user.email
+        userEmail: user.email
       });
       refetch();
     } catch (error) {
@@ -38,19 +38,6 @@ const LessonInteractions = ({ lesson , refetch}) => {
       setLiked(liked);
       setLikesCount(likesCount);
     }
-  };
-  // favourite
-  const handleFavorite = () => {
-    if (!user) {
-      Swal.fire({
-        icon: "info",
-        text: "Please log in to save lessons!",
-      });
-      return;
-    }
-
-    setIsSaved(!isSaved);
-    setFavoritesCount(isSaved ? favoritesCount - 1 : favoritesCount + 1);
   };
   // report
   const handleReport = () => {
@@ -106,13 +93,7 @@ const LessonInteractions = ({ lesson , refetch}) => {
       </button>
 
       {/* Favorites */}
-      <button
-        onClick={handleFavorite}
-        className={`btn btn-sm ${isSaved ? "btn-warning" : "btn-outline"}`}
-      >
-        <FaBookmark size={18} className={isSaved ? "fill-white" : ""} />
-        {favoritesCount}
-      </button>
+      <Favorites lesson={lesson} refetch={refetch}></Favorites>
 
       {/* Report */}
       <button

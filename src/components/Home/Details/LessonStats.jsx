@@ -1,12 +1,8 @@
-import { useState } from "react";
 import { FaHeart, FaBookmark, FaEye } from "react-icons/fa";
-
-const viewsCount = Math.floor(Math.random() * 10000); // 0 - 9999
+// static view
+const viewsCount = Math.floor(Math.random() * 10000);
 
 const LessonStats = ({lesson}) => {
-  // Static placeholders — replace with props later
-  // const [likesCount, ] = useState(1280); // Example: 1.2K
-  const [favoritesCount, ] = useState(342);
 
   return (
     <div className="flex items-center gap-6 text-gray-700 mt-6">
@@ -20,7 +16,7 @@ const LessonStats = ({lesson}) => {
       <div className="flex items-center gap-2">
         <FaBookmark className="text-blue-500" />
         <span className="font-medium">
-          {favoritesCount.toLocaleString()} Favorites
+          {lesson?.favoritesCount.toLocaleString()} Favorites
         </span>
       </div>
 
