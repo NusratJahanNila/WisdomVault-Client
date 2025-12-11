@@ -3,29 +3,43 @@ import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { FaBookmark, FaHeart, FaShare } from "react-icons/fa";
 import { LuFlagTriangleRight } from "react-icons/lu";
+import { useNavigate } from "react-router";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const LessonInteractions = ({ lesson }) => {
+const LessonInteractions = ({ lesson , refetch}) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
-  // Dummy local states (replace later with real lesson data)
-  const [isLiked, setIsLiked] = useState(false);
+  const [liked, setLiked] = useState(lesson.likes?.includes(user?.email) || false);
   const [isSaved, setIsSaved] = useState(false);
-  const [likesCount, setLikesCount] = useState(lesson.likesCount || 450);
-  const [favoritesCount, setFavoritesCount] = useState(lesson.favoritesCount || 100);
-
-  const handleLike = () => {
+  const [likesCount, setLikesCount] = useState(lesson.likesCount || 0);
+  const [favoritesCount, setFavoritesCount] = useState(lesson.favoritesCount || 0);
+  // Like
+  const handleLike = async () => {
     if (!user) {
       Swal.fire({
         icon: "info",
         text: "Please log in to like lessons!",
       });
-      return;
+      return navigate('/login');
     }
 
-    setIsLiked(!isLiked);
-    setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
-  };
+    setLiked(!liked);
+    setLikesCount(liked ? likesCount - 1 : likesCount + 1);
 
+    try {
+      await axiosSecure.post(`/lesson/${lesson._id}/like`, {
+        userId: user.email
+      });
+      refetch();
+    } catch (error) {
+      console.log(error)
+      setLiked(liked);
+      setLikesCount(likesCount);
+    }
+  };
+  // favourite
   const handleFavorite = () => {
     if (!user) {
       Swal.fire({
@@ -38,7 +52,7 @@ const LessonInteractions = ({ lesson }) => {
     setIsSaved(!isSaved);
     setFavoritesCount(isSaved ? favoritesCount - 1 : favoritesCount + 1);
   };
-
+  // report
   const handleReport = () => {
     if (!user) {
       Swal.fire("Login Required", "Please log in to report content!", "info");
@@ -72,7 +86,7 @@ const LessonInteractions = ({ lesson }) => {
       }
     });
   };
-
+  // share
   const handleShare = () => {
     console.log("Open share options");
     // TODO: Implement using react-share later
@@ -85,10 +99,10 @@ const LessonInteractions = ({ lesson }) => {
       {/* Likes */}
       <button
         onClick={handleLike}
-        className={`btn btn-sm ${isLiked ? "btn-error text-white" : "btn-outline"}`}
+        className={`btn btn-sm ${liked ? "btn-error" : "btn-outline"}`}
       >
-        <FaHeart size={18} className={isLiked ? "fill-white" : ""} />
-        {likesCount}
+        <FaHeart size={18} className={liked ? "fill-white" : ""} />
+        {lesson.likesCount}
       </button>
 
       {/* Favorites */}
@@ -105,7 +119,7 @@ const LessonInteractions = ({ lesson }) => {
         onClick={handleReport}
         className="btn btn-sm btn-outline btn-error"
       >
-        <LuFlagTriangleRight  size={18} />
+        <LuFlagTriangleRight size={18} />
         Report
       </button>
 

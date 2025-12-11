@@ -20,7 +20,7 @@ const LessonDetails = () => {
   console.log(id)
 
   // get lesson data
-  const {data: lesson={}, isLoading}=useQuery({
+  const {data: lesson={}, isLoading, refetch}=useQuery({
     queryKey: ['lesson',id],
     queryFn:async()=>{
       const result=await axios.get(`${import.meta.env.VITE_API_URL}/lesson-details/${id}`)
@@ -61,10 +61,10 @@ const LessonDetails = () => {
       {!isLocked && <LessonAuthorCard lesson={lesson} />}
       
       {/* State Information */}
-      {!isLocked && <LessonStats />}
+      {!isLocked && <LessonStats lesson={lesson}/>}
 
       {/* Like / Save / Share / Report */}
-      {!isLocked && <LessonInteractions lesson={lesson} />}
+      {!isLocked && <LessonInteractions lesson={lesson} refetch={refetch} />}
 
       {/* Comment section */}
       {!isLocked && <CommentsSection lessonId={lesson._id} />}

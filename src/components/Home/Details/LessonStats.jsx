@@ -3,9 +3,9 @@ import { FaHeart, FaBookmark, FaEye } from "react-icons/fa";
 
 const viewsCount = Math.floor(Math.random() * 10000); // 0 - 9999
 
-const LessonStats = () => {
+const LessonStats = ({lesson}) => {
   // Static placeholders — replace with props later
-  const [likesCount, ] = useState(1280); // Example: 1.2K
+  // const [likesCount, ] = useState(1280); // Example: 1.2K
   const [favoritesCount, ] = useState(342);
 
   return (
@@ -13,7 +13,7 @@ const LessonStats = () => {
       {/* Likes */}
       <div className="flex items-center gap-2">
         <FaHeart className="text-red-500" />
-        <span className="font-medium">{likesCount.toLocaleString()} Likes</span>
+        <span className="font-medium">{lesson?.likesCount.toLocaleString()} Likes</span>
       </div>
 
       {/* Favorites */}
