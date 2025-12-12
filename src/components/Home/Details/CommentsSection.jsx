@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const CommentsSection = ({ lessonId }) => {
   const { user } = useAuth();
@@ -14,12 +16,15 @@ const CommentsSection = ({ lessonId }) => {
     formState: { errors },
   } = useForm();
 
-  // Static comments for UI
-  const comments = [
-    { id: 1, author: "Alice", text: "This helped me a lot!" },
-    { id: 2, author: "Mark", text: "Very relatable!" },
-  ];
-
+  // get commnents
+  const { data: comments = [],refetch } = useQuery({
+    queryKey: ['comments', lessonId],
+    queryFn: async () => {
+      const result = await axiosSecure.get(`/comments/${lessonId}`)
+      return result.data;
+    }
+  })
+  console.log(comments)
   // Submit handler
   const onSubmit = async (data) => {
     if (!user) {
@@ -44,6 +49,7 @@ const CommentsSection = ({ lessonId }) => {
           showConfirmButton: false,
         });
         reset();
+        refetch();
       }
     } catch (error) {
       console.log(error)
@@ -54,6 +60,8 @@ const CommentsSection = ({ lessonId }) => {
     reset();
   };
 
+  // // loading
+  // if (isLoading) return <LoadingSpinner />
   return (
     <section className="pt-6">
       <h3 className="text-lg font-bold mb-3">Comments</h3>
@@ -61,9 +69,9 @@ const CommentsSection = ({ lessonId }) => {
       {/* show comment */}
       <div className="space-y-3 mb-4">
         {comments.map((c) => (
-          <div key={c.id} className="bg-base-200 p-3 rounded-lg text-sm">
-            <strong>{c.author}</strong>
-            <p>{c.text}</p>
+          <div key={c._id} className="bg-base-200 p-3 rounded-lg text-sm">
+            <strong>{c.userEmail}</strong>
+            <p>{c.commentText}</p>
           </div>
         ))}
       </div>
