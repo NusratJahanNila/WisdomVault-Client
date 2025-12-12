@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { LuNotebookPen } from "react-icons/lu";
-import { FaListAlt, FaUserCog } from "react-icons/fa";
+import { FaHeart, FaListAlt, FaUserCog } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
 const Sidebar = () => {
     return (
@@ -25,6 +25,13 @@ const Sidebar = () => {
                     {/* icon */}
                     <FaListAlt className='text-primary'/>
                     <span className="is-drawer-close:hidden">My Lesson</span>
+                </Link>
+            </li>
+            <li>
+                <Link to={'/dashboard/my-favorites'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Favorites">
+                    {/* icon */}
+                    <FaHeart className='text-primary'/>
+                    <span className="is-drawer-close:hidden">My Favorites</span>
                 </Link>
             </li>
             <li>

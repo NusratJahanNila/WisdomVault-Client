@@ -14,6 +14,7 @@ import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers'
 import PublicLessons from '../pages/PublicLessons/PublicLessons'
 import LessonDetails from '../pages/LessonDetails/LessonDetails'
 import AuthorProfile from '../components/AuthorProfile/AuthorProfile'
+import MyFavorites from '../pages/Dashboard/User/MyFavorites/MyFavorites'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -69,6 +70,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyLesson></MyLesson>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-favorites',
+        element: (
+          <PrivateRoute>
+            <MyFavorites></MyFavorites>
           </PrivateRoute>
         ),
       },
