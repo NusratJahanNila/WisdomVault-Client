@@ -15,6 +15,7 @@ import PublicLessons from '../pages/PublicLessons/PublicLessons'
 import LessonDetails from '../pages/LessonDetails/LessonDetails'
 import AuthorProfile from '../components/AuthorProfile/AuthorProfile'
 import MyFavorites from '../pages/Dashboard/User/MyFavorites/MyFavorites'
+import ReportedLessons from '../pages/Dashboard/Admin/ReportedLessons/ReportedLessons'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -87,6 +88,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageUsers></ManageUsers>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'reported-lessons',
+        element: (
+          <PrivateRoute>
+            <ReportedLessons/>
           </PrivateRoute>
         ),
       },

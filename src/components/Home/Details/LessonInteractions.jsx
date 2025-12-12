@@ -2,10 +2,10 @@ import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import {  FaHeart, FaShare } from "react-icons/fa";
-import { LuFlagTriangleRight } from "react-icons/lu";
 import { useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Favorites from "./lessonInteraction/Favorites";
+import Report from "./lessonInteraction/Report";
 
 const LessonInteractions = ({ lesson , refetch}) => {
   const { user } = useAuth();
@@ -39,40 +39,7 @@ const LessonInteractions = ({ lesson , refetch}) => {
       setLikesCount(likesCount);
     }
   };
-  // report
-  const handleReport = () => {
-    if (!user) {
-      Swal.fire("Login Required", "Please log in to report content!", "info");
-      return;
-    }
-
-    Swal.fire({
-      title: "Report Lesson",
-      input: "select",
-      inputOptions: {
-        inappropriate: "Inappropriate Content",
-        harassment: "Hate Speech / Harassment",
-        misleading: "Misleading / False Info",
-        spam: "Spam or Promotional",
-        sensitive: "Sensitive Content",
-        other: "Other",
-      },
-      inputPlaceholder: "Select report reason",
-      showCancelButton: true,
-      confirmButtonText: "Submit Report",
-      showLoaderOnConfirm: true,
-      preConfirm: (reason) => {
-        if (!reason) return Swal.showValidationMessage("Please select a reason!");
-        console.log("Report reason:", reason);
-
-        // TODO: POST /api/reports { lessonId, reporterEmail, reason, timestamp }
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Reported!", "Thank you for helping keep the platform safe.", "success");
-      }
-    });
-  };
+  
   // share
   const handleShare = () => {
     console.log("Open share options");
@@ -96,13 +63,7 @@ const LessonInteractions = ({ lesson , refetch}) => {
       <Favorites lesson={lesson} refetch={refetch}></Favorites>
 
       {/* Report */}
-      <button
-        onClick={handleReport}
-        className="btn btn-sm btn-outline btn-error"
-      >
-        <LuFlagTriangleRight size={18} />
-        Report
-      </button>
+      <Report lesson={lesson} refetch={refetch}></Report>
 
       {/* Share */}
       <button

@@ -6,11 +6,20 @@ import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../../components/Shared/LoadingSpinner';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router';
+import { useForm } from 'react-hook-form';
 
+const categories = [
+    "Personal Growth",
+    "Career",
+    "Relationships",
+    "Mindset",
+    "Mistakes Learned",
+];
 const MyFavorites = () => {
     const { user } = useAuth();
     // const { userData } = useRole();
     const axiosSecure = useAxiosSecure();
+    const { register } = useForm();
 
     // get my all lessons from the db
     const { data: favorites = [], isLoading, refetch } = useQuery({
@@ -36,7 +45,6 @@ const MyFavorites = () => {
                     .then(res => {
                         console.log('after delete: ', res.data);
                         if (res.data.deletedCount) {
-                            // refresh data on ui
                             refetch();
                             Swal.fire({
                                 title: "Deleted!",
@@ -53,8 +61,21 @@ const MyFavorites = () => {
     return (
         <div className="p-10 ">
             <div className="p-6 bg-white rounded-xl shadow">
-                <h2 className="text-2xl font-bold mb-4">My Favorites</h2>
-
+                <div className="flex justify-between items-center mb-5">
+                    <h2 className="text-2xl font-bold mb-4">My Favorites</h2>
+                    {/* filter */}
+                    <select
+                    {...register("category", { required: true })}
+                    className="select select-bordered w-fit"
+                >
+                    <option disabled selected>
+                        Select Category
+                    </option>
+                    {categories.map((cat) => (
+                        <option key={cat}>{cat}</option>
+                    ))}
+                </select>
+                </div>
                 <div className="overflow-x-auto">
                     <table className="table table-zebra w-full">
                         <thead>

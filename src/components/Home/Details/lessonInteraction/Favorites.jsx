@@ -47,7 +47,7 @@ const Favorites = ({ lesson, refetch }) => {
             className={`btn btn-sm ${isSaved ? "btn-warning" : "btn-outline"}`}
         >
             <FaBookmark size={18} className={isSaved ? "fill-white" : ""} />
-            {favoritesCount}
+            {lesson.favoritesCount}
         </button>
     );
 };
