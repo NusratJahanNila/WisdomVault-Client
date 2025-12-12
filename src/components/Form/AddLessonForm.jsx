@@ -4,8 +4,8 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { imageUpload } from "../../utils";
-import axios from "axios";
 import useRole from "../../hooks/useRole";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const categories = [
     "Personal Growth",
@@ -26,6 +26,7 @@ const AddLessonForm = () => {
     const { register, handleSubmit, reset } = useForm();
     const { user } = useAuth();
     const { userData } = useRole();
+    const axiosSecure=useAxiosSecure();
 
     const [loading, setLoading] = useState(false);
 
@@ -66,7 +67,7 @@ const AddLessonForm = () => {
                 lessonData.image= null;
             }
 
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/lessons`, lessonData);
+            const res = await axiosSecure.post(`/lessons`, lessonData);
 
             if (res.data.insertedId || res.data._id) {
                 Swal.fire({
