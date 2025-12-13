@@ -16,6 +16,9 @@ import LessonDetails from '../pages/LessonDetails/LessonDetails'
 import AuthorProfile from '../components/AuthorProfile/AuthorProfile'
 import MyFavorites from '../pages/Dashboard/User/MyFavorites/MyFavorites'
 import ReportedLessons from '../pages/Dashboard/Admin/ReportedLessons/ReportedLessons'
+import Payment from '../pages/Payment/Payment'
+import PaymentSuccess from '../pages/Payment/PaymentSuccess'
+import PaymentCancel from '../pages/Payment/PaymentCancel'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -37,7 +40,19 @@ export const router = createBrowserRouter([
       {
         path:"/author-profile/:authorEmail",
         element: <AuthorProfile></AuthorProfile>
-      }
+      },
+      {
+        path:"/payment",
+        element: <Payment></Payment>
+      },
+      {
+        path:"/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>
+      },
+      {
+        path:"/payment-cancel",
+        element: <PaymentCancel></PaymentCancel>
+      },
     ],
   },
   { path: '/login', element: <Login /> },

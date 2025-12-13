@@ -23,7 +23,7 @@ const Navbar = () => {
         <li><NavLink to={'/public-lessons'} className={({ isActive }) => 
       `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
     }>Public Lesson</NavLink></li>
-        <li><NavLink to={'/'} className={({ isActive }) => 
+        <li><NavLink to={'/payment'} className={({ isActive }) => 
       `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
     }>Upgrade to Premium</NavLink></li>
     </>
