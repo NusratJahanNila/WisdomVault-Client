@@ -1,13 +1,14 @@
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
-import {  FaHeart, FaShare } from "react-icons/fa";
+import { FaHeart, FaShare } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Favorites from "./lessonInteraction/Favorites";
 import Report from "./lessonInteraction/Report";
+import Share from "./lessonInteraction/Share";
 
-const LessonInteractions = ({ lesson , refetch}) => {
+const LessonInteractions = ({ lesson, refetch }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
@@ -39,13 +40,8 @@ const LessonInteractions = ({ lesson , refetch}) => {
       setLikesCount(likesCount);
     }
   };
-  
-  // share
-  const handleShare = () => {
-    console.log("Open share options");
-    
-    Swal.fire("Share Feature", "Social sharing coming soon!", "info");
-  };
+
+ 
 
   return (
     <div className="mt-6 p-4 rounded-xl bg-base-200 shadow-sm flex flex-wrap gap-4 items-center justify-between">
@@ -66,13 +62,7 @@ const LessonInteractions = ({ lesson , refetch}) => {
       <Report lesson={lesson} refetch={refetch}></Report>
 
       {/* Share */}
-      <button
-        onClick={handleShare}
-        className="btn btn-sm btn-outline"
-      >
-        <FaShare size={18} />
-        Share
-      </button>
+      <Share lesson={lesson}></Share>
 
     </div>
   );
