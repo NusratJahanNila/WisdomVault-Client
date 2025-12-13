@@ -43,7 +43,7 @@ const LessonInteractions = ({ lesson , refetch}) => {
   // share
   const handleShare = () => {
     console.log("Open share options");
-    // TODO: Implement using react-share later
+    
     Swal.fire("Share Feature", "Social sharing coming soon!", "info");
   };
 
