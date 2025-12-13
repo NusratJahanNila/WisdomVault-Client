@@ -8,18 +8,13 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 
-const categories = [
-    "Personal Growth",
-    "Career",
-    "Relationships",
-    "Mindset",
-    "Mistakes Learned",
-];
 const MyFavorites = () => {
     const { user } = useAuth();
     // const { userData } = useRole();
     const axiosSecure = useAxiosSecure();
-    const { register } = useForm();
+    const { register, watch } = useForm();
+    // watch dropdown values
+    const selectedCategory = watch("category");
 
     // get my all lessons from the db
     const { data: favorites = [], isLoading, refetch } = useQuery({
@@ -58,6 +53,11 @@ const MyFavorites = () => {
     };
     // loading
     if (isLoading) return <LoadingSpinner />
+
+    const filteredFavorites = favorites.filter((fav) => {
+        const categoryMatch = selectedCategory ? fav.category === selectedCategory : true;
+        return categoryMatch
+    });
     return (
         <div className="p-10 ">
             <div className="p-6 bg-white rounded-xl shadow">
@@ -65,16 +65,16 @@ const MyFavorites = () => {
                     <h2 className="text-2xl font-bold mb-4">My Favorites</h2>
                     {/* filter */}
                     <select
-                    {...register("category", { required: true })}
-                    className="select select-bordered w-fit"
-                >
-                    <option disabled selected>
-                        Select Category
-                    </option>
-                    {categories.map((cat) => (
-                        <option key={cat}>{cat}</option>
-                    ))}
-                </select>
+                        {...register("category")}
+                        className="select select-bordered w-fit"
+                    >
+                        <option value="">All Categories</option>
+                        <option value="Personal Growth">Personal Growth</option>
+                        <option value="Career">Career</option>
+                        <option value="Relationships">Relationships</option>
+                        <option value="Mindset">Mindset</option>
+                        <option value="Mistakes Learned">Mistakes Learned</option>
+                    </select>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table table-zebra w-full">
@@ -91,7 +91,7 @@ const MyFavorites = () => {
                         </thead>
 
                         <tbody>
-                            {favorites.map((favorite, index) => (
+                            {filteredFavorites.map((favorite, index) => (
                                 <tr key={favorite._id}>
                                     <th>{index + 1}</th>
                                     <td className="font-semibold">{favorite.title}</td>

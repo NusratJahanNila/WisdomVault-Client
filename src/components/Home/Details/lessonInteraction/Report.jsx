@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import useAuth from '../../../hooks/useAuth';
-// import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { FaFlag } from 'react-icons/fa';
 import useAuth from '../../../../hooks/useAuth';
