@@ -4,6 +4,7 @@ import LessonCard from '../../../components/Home/Lessons/LessonCard';
 import { useQuery } from '@tanstack/react-query';
 import useRole from '../../../hooks/useRole';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Link } from 'react-router';
 
 const Profile = () => {
   const { user } = useAuth()
@@ -80,9 +81,9 @@ const Profile = () => {
             </div>
           )}
 
-          <button className="bg-secondary px-6 py-2 rounded-lg text-white mt-4 hover:bg-teal-700">
+          <Link to={'/update-profile'} className="bg-secondary px-6 py-2 rounded-lg text-white mt-4 hover:bg-teal-700">
             Update Profile
-          </button>
+          </Link>
         </div>
       </div>
 

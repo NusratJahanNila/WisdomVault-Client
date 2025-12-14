@@ -20,6 +20,8 @@ import Payment from '../pages/Payment/Payment'
 import PaymentSuccess from '../pages/Payment/PaymentSuccess'
 import PaymentCancel from '../pages/Payment/PaymentCancel'
 import ManageLessons from '../pages/Dashboard/Admin/ManageLessons/ManageLessons'
+import UpdateLesson from '../pages/Dashboard/User/UpdateLesson/UpdateLesson'
+import UpdateProfile from '../pages/Dashboard/Profile/UpdateProfile'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -53,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path:"/payment-cancel",
         element: <PaymentCancel></PaymentCancel>
+      },
+      {
+        path:"/update-profile",
+        element: <UpdateProfile></UpdateProfile>
       },
     ],
   },
