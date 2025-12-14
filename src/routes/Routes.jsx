@@ -19,6 +19,7 @@ import ReportedLessons from '../pages/Dashboard/Admin/ReportedLessons/ReportedLe
 import Payment from '../pages/Payment/Payment'
 import PaymentSuccess from '../pages/Payment/PaymentSuccess'
 import PaymentCancel from '../pages/Payment/PaymentCancel'
+import ManageLessons from '../pages/Dashboard/Admin/ManageLessons/ManageLessons'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -103,6 +104,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageUsers></ManageUsers>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'manage-lessons',
+        element: (
+          <PrivateRoute>
+            <ManageLessons></ManageLessons>
           </PrivateRoute>
         ),
       },

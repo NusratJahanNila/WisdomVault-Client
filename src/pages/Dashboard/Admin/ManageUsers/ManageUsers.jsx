@@ -11,7 +11,7 @@ const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
     // update modal
     const [selectedUser, setSelectedUser] = useState(null);
-    const isOpen = !!selectedUser; // Modal is open if a user is selected
+    const isOpen = !!selectedUser;
     
     const openModal = (user) => setSelectedUser(user);
     const closeModal = () => setSelectedUser(null);
@@ -40,7 +40,6 @@ const ManageUsers = () => {
                     .then(res => {
                         console.log('after delete: ', res.data);
                         if (res.data.deletedCount) {
-                            // refresh data on ui
                             refetch();
                             Swal.fire({
                                 title: "Deleted!",

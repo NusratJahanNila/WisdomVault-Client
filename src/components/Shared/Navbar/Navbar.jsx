@@ -12,19 +12,19 @@ const Navbar = () => {
     // routes
     const links = <>
         <li><NavLink to={'/'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
+      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
     }>Home</NavLink></li>
         <li><NavLink to={'/dashboard/add-lesson'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
+      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
     }>Add Lesson</NavLink></li>
         <li><NavLink to={'/dashboard/my-lessons'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
+      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
     }>My Lessons</NavLink></li>
         <li><NavLink to={'/public-lessons'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
+      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
     }>Public Lesson</NavLink></li>
         <li><NavLink to={'/payment'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
+      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
     }>Upgrade to Premium</NavLink></li>
     </>
     return (
