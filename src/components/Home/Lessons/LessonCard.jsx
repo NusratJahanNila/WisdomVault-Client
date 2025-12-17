@@ -13,7 +13,7 @@ const LessonCard = ({ lesson }) => {
     return (
         <div className="relative group">
             {/* Card */}
-            <div className={`h-60 relative card bg-base-100 shadow-xl border border-gray-300 p-4 transition ${isLocked ? "group-hover:blur-[2px]" : ""}`} >
+            <div className={`h-65 relative card bg-base-100 shadow-xl border border-gray-300 p-4 transition ${isLocked ? "group-hover:blur-[2px]" : ""}`} >
                 {/* Hover Overlay */}
                 {isLocked && (
                     <div
