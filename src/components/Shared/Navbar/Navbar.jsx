@@ -5,8 +5,10 @@ import { Link, NavLink } from 'react-router'
 import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/avater.png'
 import logo from '../../../assets/WisdomVault.png'
+import useRole from '../../../hooks/useRole'
 const Navbar = () => {
-    const { user, logOut } = useAuth()
+    const { user, logOut } = useAuth();
+    const { userData } = useRole();
     const [isOpen, setIsOpen] = useState(false)
 
     // routes
@@ -14,21 +16,27 @@ const Navbar = () => {
         <li><NavLink to={'/'} className={({ isActive }) =>
             `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
         }>Home</NavLink></li>
-        <li><NavLink to={'/dashboard'} className={({ isActive }) =>
-            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
-        }>Dashboard</NavLink></li>
-        {/* <li><NavLink to={'/dashboard/add-lesson'} className={({ isActive }) =>
-            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
-        }>Add Lesson</NavLink></li>
-        <li><NavLink to={'/dashboard/my-lessons'} className={({ isActive }) =>
-            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
-        }>My Lessons</NavLink></li> */}
+        {
+            user && <>
+                <li><NavLink to={'/dashboard/add-lesson'} className={({ isActive }) =>
+                    `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
+                }>Add Lesson</NavLink></li>
+                <li><NavLink to={'/dashboard/my-lessons'} className={({ isActive }) =>
+                    `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
+                }>My Lessons</NavLink></li>
+
+            </>
+        }
         <li><NavLink to={'/public-lessons'} className={({ isActive }) =>
             `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
         }>Public Lesson</NavLink></li>
-        <li><NavLink to={'/payment'} className={({ isActive }) =>
-            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
-        }>Upgrade to Premium</NavLink></li>
+
+        {
+            !userData?.isPremium && <li><NavLink to={'/payment'} className={({ isActive }) =>
+                `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
+            }>Upgrade to Premium</NavLink></li>
+        }
+
     </>
     return (
         <div className=" bg-base-100 shadow-sm">
