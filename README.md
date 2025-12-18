@@ -1,16 +1,42 @@
-# React + Vite
+WisdomVault
+-----------
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+WisdomVault is a lesson-sharing and reflection platform where users can create, explore, and save meaningful lessons focused on personal growth, mindset, career, and emotional well-being. The platform supports both free and premium content with role-based access for users and admins.
 
-Currently, two official plugins are available:
+Live Site
+-----------
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Client URL: https://wisdom-vault-696d1.web.app
 
-## React Compiler
+Server-Side URL: https://wisdomvault-backend.vercel.app 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+Key Features
+------------
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.Users can create, edit, and manage their own lessons with privacy and access control (public/private, free/premium).
+
+2.Advanced lesson browsing with category, emotional tone, search, sorting, and pagination support.
+
+3.Users can save favorite lessons and track their contributions through a personalized dashboard with analytics.
+
+4.Admin panel to manage lessons, users, reported content, and monitor platform-wide analytics.
+
+5.Dynamic dashboards for both users and admins, including statistics, recent activity, and growth charts.
+
+Technologies Used
+-------------
+
+1.React.js
+
+2.Tailwind CSS & DaisyUI
+
+3.Node.js & Express.js
+
+4.MongoDB
+
+5.Firebase Authentication
+
+6.TanStack Query
+
+7.Recharts
