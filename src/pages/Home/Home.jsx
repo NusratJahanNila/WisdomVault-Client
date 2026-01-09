@@ -4,12 +4,16 @@ import WhyLerningFromLifeLesson from '../../components/Home/WhyLerningFromLifeLe
 import FeaturedLessons from '../../components/Home/FeaturedLessons';
 import TopContributors from '../../components/Home/TopContributors';
 import MostSavedLessons from '../../components/Home/MostSavedLessons';
+import HowItWorks from '../../components/Home/Lessons/HowItWorks';
+import PlatformStats from '../../components/Home/PlatformStats';
 
 const Home = () => {
     return (
         <div>
             <Banner />
+            <PlatformStats></PlatformStats>
             <FeaturedLessons />
+            <HowItWorks></HowItWorks>
             <WhyLerningFromLifeLesson/>
             <TopContributors />
             <div className="mb-10">
