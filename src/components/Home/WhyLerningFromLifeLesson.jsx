@@ -38,13 +38,13 @@ const WhyLerningFromLifeLesson = () => {
   ];
 
   return (
-    <section className="py-12 md:py-20 bg-white">
+    <section className="py-12 md:py-20 dark:bg-gray-800">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Why Learning From Life Matters
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">
+            Why Learning From <span className="text-[#F69074] dark:text-[#F69074]">Life Matters</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Transform experiences into wisdom that shapes your future
           </p>
         </div>
