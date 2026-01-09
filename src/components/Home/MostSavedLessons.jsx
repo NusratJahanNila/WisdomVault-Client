@@ -24,7 +24,7 @@ const MostSavedLessons = () => {
                 Lessons the community loves the most
             </p>
 
-            <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
+            <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6">
                 {lessons.map(lesson => (
                     <LessonCard key={lesson._id} lesson={lesson} />
                 ))}

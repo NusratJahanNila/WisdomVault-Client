@@ -1,4 +1,5 @@
 import { BookOpen, Heart, Save, Crown } from "lucide-react";
+import Container from "../../Shared/Container";
 
 const HowItWorks = () => {
   const steps = [
@@ -25,7 +26,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-16 px-6 max-w-6xl mx-auto">
+    <Container>
       {/* Header */}
       <header className="mb-12 text-center">
         <h2 className="text-4xl font-extrabold uppercase tracking-tight mb-2">
@@ -46,8 +47,8 @@ const HowItWorks = () => {
           {steps.map((step, index) => (
             <div key={index} className="flex flex-col items-center text-center">
               {/* Icon Circle */}
-              <div className="relative w-32 h-32 rounded-full bg-primary  shadow-xl flex items-center justify-center mb-6 border-8 border-secondary">
-                <step.icon className="text-white w-12 h-12" />
+              <div className="relative w-22 h-22 rounded-full bg-primary  shadow-xl flex items-center justify-center mb-6 border-8 border-secondary">
+                <step.icon className="text-white w-8 h-8" />
               </div>
 
               {/* Content */}
@@ -57,7 +58,7 @@ const HowItWorks = () => {
           ))}
         </div>
       </div>
-    </section>
+    </Container>
   );
 };
 

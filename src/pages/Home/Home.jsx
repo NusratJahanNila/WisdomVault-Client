@@ -6,19 +6,23 @@ import TopContributors from '../../components/Home/TopContributors';
 import MostSavedLessons from '../../components/Home/MostSavedLessons';
 import HowItWorks from '../../components/Home/Lessons/HowItWorks';
 import PlatformStats from '../../components/Home/PlatformStats';
+import FAQ from '../../components/Home/FAQ';
+import CTA from '../../components/Home/CTA';
 
 const Home = () => {
     return (
         <div>
             <Banner />
-            <PlatformStats></PlatformStats>
+            <PlatformStats />
             <FeaturedLessons />
-            <HowItWorks></HowItWorks>
+            <HowItWorks/>
             <WhyLerningFromLifeLesson/>
             <TopContributors />
             <div className="mb-10">
                 <MostSavedLessons />
             </div>
+            <FAQ/>
+            <CTA/>
         </div>
     );
 };
