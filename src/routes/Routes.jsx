@@ -38,48 +38,55 @@ export const router = createBrowserRouter([
       },
       {
         path: '/public-lessons',
-        element:<PublicLessons />
+        element: <PublicLessons />
       },
       {
         path: '/about',
-        element:<AboutPage />
+        element: <AboutPage />
       },
       {
         path: '/contact',
-        element:<ContactPage />
+        element: <ContactPage />
       },
       {
         path: '/help',
-        element:<HelpPage />
+        element: <HelpPage />
       },
       {
         path: '/lesson-details/:id',
         element: <LessonDetails></LessonDetails>
       },
       {
-        path:"/author-profile/:authorEmail",
+        path: "/author-profile/:authorEmail",
         element: <AuthorProfile></AuthorProfile>
       },
       {
-        path:"/payment",
+        path: "/payment",
         element: <Payment></Payment>
       },
       {
-        path:"/payment-success",
+        path: "/payment-success",
         element: <PaymentSuccess></PaymentSuccess>
       },
       {
-        path:"/payment-cancel",
+        path: "/payment-cancel",
         element: <PaymentCancel></PaymentCancel>
       },
       {
-        path:"/update-profile",
+        path: "/update-profile",
         element: <UpdateProfile></UpdateProfile>
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/signup',
+        element: <SignUp />
       },
     ],
   },
-  { path: '/login', element: <Login /> },
-  { path: '/signup', element: <SignUp /> },
+
   {
     path: '/dashboard',
     element: (
@@ -146,7 +153,7 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ReportedLessons/>
+              <ReportedLessons />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -159,7 +166,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      
+
     ],
   },
 ])

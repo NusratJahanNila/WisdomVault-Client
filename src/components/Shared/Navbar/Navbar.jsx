@@ -237,19 +237,6 @@ const Navbar = () => {
                             </>
                         ) : (
                             <div className='flex items-center gap-3'>
-                                {/* Theme Toggle for logged out users */}
-                                <div className="hidden lg:flex items-center">
-                                    <label className="swap swap-rotate">
-                                        <input 
-                                            type="checkbox" 
-                                            checked={theme === "dark"}
-                                            onChange={(e) => handleTheme(e.target.checked)}
-                                            className="theme-controller" 
-                                        />
-                                        <Sun className="swap-on fill-current w-5 h-5 text-[#F69074]" />
-                                        <Moon className="swap-off fill-current w-5 h-5 text-[#02a2a2]" />
-                                    </label>
-                                </div>
                                 
                                 <div className='flex gap-2'>
                                     <Link
