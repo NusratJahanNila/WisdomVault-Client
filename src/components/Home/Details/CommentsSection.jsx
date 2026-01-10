@@ -63,15 +63,15 @@ const CommentsSection = ({ lessonId }) => {
   // // loading
   // if (isLoading) return <LoadingSpinner />
   return (
-    <section className="pt-6">
-      <h3 className="text-lg font-bold mb-3">Comments</h3>
+    <section className="pt-6 dark:text-white">
+      <h3 className="text-lg font-bold mb-3 dark:text-white">Comments</h3>
 
       {/* show comment */}
       <div className="space-y-3 mb-4">
         {comments.map((c) => (
-          <div key={c._id} className="bg-base-200 p-3 rounded-lg text-sm">
-            <strong>{c.userEmail}</strong>
-            <p>{c.commentText}</p>
+          <div key={c._id} className="bg-base-200 p-3 rounded-lg text-sm dark:bg-gray-800 dark:border dark:border-gray-700 dark:text-gray-300">
+            <strong className="dark:text-white">{c.userEmail}</strong>
+            <p className="dark:text-gray-400">{c.commentText}</p>
           </div>
         ))}
       </div>
@@ -82,7 +82,7 @@ const CommentsSection = ({ lessonId }) => {
           <input
             type="text"
             placeholder="Write a comment..."
-            className="input input-bordered w-full"
+            className="input input-bordered w-full dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-400"
             {...register("comment", {
               required: "Comment cannot be empty",
               minLength: {
@@ -92,7 +92,7 @@ const CommentsSection = ({ lessonId }) => {
             })}
           />
           {errors.comment && (
-            <p className="text-red-500 text-xs mt-1">
+            <p className="text-red-500 text-xs mt-1 dark:text-red-400">
               {errors.comment.message}
             </p>
           )}
@@ -100,7 +100,7 @@ const CommentsSection = ({ lessonId }) => {
 
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-primary dark:bg-teal-700 dark:hover:bg-teal-600 dark:border-0"
         >
           Post
         </button>

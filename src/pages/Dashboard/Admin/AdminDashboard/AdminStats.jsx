@@ -33,27 +33,27 @@ const AdminStats = () => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-blue-100 p-5 rounded-lg flex items-center gap-4">
-                <FaUsers size={30} />
+            <div className="bg-blue-100 p-5 rounded-lg flex items-center gap-4 dark:bg-gray-800 dark:border dark:border-gray-700">
+                <FaUsers size={30} className="dark:text-blue-400" />
                 <div>
-                    <p className="text-sm">Total Users</p>
-                    <h3 className="text-xl font-bold">{users.length}</h3>
+                    <p className="text-sm dark:text-gray-300">Total Users</p>
+                    <h3 className="text-xl font-bold dark:text-white">{users.length}</h3>
                 </div>
             </div>
 
-            <div className="bg-green-100 p-5 rounded-lg flex items-center gap-4">
-                <FaBookOpen size={30} />
+            <div className="bg-green-100 p-5 rounded-lg flex items-center gap-4 dark:bg-gray-800 dark:border dark:border-gray-700">
+                <FaBookOpen size={30} className="dark:text-green-400" />
                 <div>
-                    <p className="text-sm">Public Lessons</p>
-                    <h3 className="text-xl font-bold">{publicLessons.length}</h3>
+                    <p className="text-sm dark:text-gray-300">Public Lessons</p>
+                    <h3 className="text-xl font-bold dark:text-white">{publicLessons.length}</h3>
                 </div>
             </div>
 
-            <div className="bg-red-100 p-5 rounded-lg flex items-center gap-4">
-                <FaFlag size={30} />
+            <div className="bg-red-100 p-5 rounded-lg flex items-center gap-4 dark:bg-gray-800 dark:border dark:border-gray-700">
+                <FaFlag size={30} className="dark:text-red-400" />
                 <div>
-                    <p className="text-sm">Reported Lessons</p>
-                    <h3 className="text-xl font-bold">{reports.length}</h3>
+                    <p className="text-sm dark:text-gray-300">Reported Lessons</p>
+                    <h3 className="text-xl font-bold dark:text-white">{reports.length}</h3>
                 </div>
             </div>
         </div>

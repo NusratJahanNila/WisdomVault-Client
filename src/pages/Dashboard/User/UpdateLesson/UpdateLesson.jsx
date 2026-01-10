@@ -15,7 +15,7 @@ const UpdateLesson = ({ lesson ,refetch}) => {
     return (
         <>
             <button
-                className="btn btn-xs bg-primary text-white"
+                className="btn btn-xs bg-[#F69074]  text-white"
                 onClick={() => handleUpdate(lesson._id)}
             >
                 Update

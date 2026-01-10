@@ -171,7 +171,7 @@ const AddLessonForm = () => {
                 {/* Submit */}
                 <button
                     type="submit"
-                    className="btn btn-primary w-full mt-4"
+                    className="btn w-full mt-4 bg-[#F69074]"
                     disabled={loading}
                 >
                     {loading ? "Posting..." : "Submit Lesson"}

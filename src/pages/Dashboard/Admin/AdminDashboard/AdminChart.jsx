@@ -34,14 +34,20 @@ const AdminChart = () => {
     }, []);
 
     return (
-        <div className="bg-white p-5 rounded-lg shadow lg:col-span-2">
-            <h3 className="font-bold text-lg mb-4">Lesson Growth</h3>
+        <div className="bg-white p-5 rounded-lg shadow lg:col-span-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:shadow-gray-900/50">
+            <h3 className="font-bold text-lg mb-4 dark:text-white">Lesson Growth</h3>
 
             <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={chartData}>
-                    <XAxis dataKey="date" />
-                    <YAxis allowDecimals={false} />
-                    <Tooltip />
+                    <XAxis dataKey="date" stroke="#d1d5db" />
+                    <YAxis allowDecimals={false} stroke="#d1d5db" />
+                    <Tooltip 
+                        contentStyle={{ 
+                            backgroundColor: '#1f2937', 
+                            border: '1px solid #374151',
+                            color: '#f3f4f6'
+                        }}
+                    />
                     <Line
                         type="monotone"
                         dataKey="count"

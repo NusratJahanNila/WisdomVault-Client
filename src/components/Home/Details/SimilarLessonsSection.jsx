@@ -19,8 +19,8 @@ const SimilarLessonsSection = ({ lesson }) => {
   if (!similarLessons.length) return null;
 
   return (
-    <section className="mt-12">
-      <h3 className="text-xl font-bold mb-4">
+    <section className="mt-12 dark:text-white">
+      <h3 className="text-xl font-bold mb-4 dark:text-white">
         Similar Lessons You May Like
       </h3>
 

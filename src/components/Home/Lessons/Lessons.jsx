@@ -37,7 +37,7 @@ const Lessons = () => {
     }, [currentPage, category, emotionalTone, sortBy, search]);
 
     return (
-        <div>
+        <div className="dark:bg-gray-900 dark:text-white">
             {/* Filters */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
                 <div className="flex items-center gap-8">
@@ -46,13 +46,13 @@ const Lessons = () => {
                     <div className="relative">
                         <button
                             onClick={() => setActiveFilter(activeFilter === 'category' ? null : 'category')}
-                            className="flex items-center gap-1 font-semibold border-b-2 border-transparent hover:border-primary"
+                            className="flex items-center gap-1 font-semibold border-b-2 border-transparent hover:border-primary dark:text-gray-300 dark:hover:border-teal-400 dark:hover:text-teal-400"
                         >
-                            Category <IoMdArrowDropdown />
+                            Category <IoMdArrowDropdown className="dark:text-gray-400" />
                         </button>
 
                         {activeFilter === 'category' && (
-                            <div className="absolute bg-white shadow-md rounded w-40 mt-2 z-50">
+                            <div className="absolute bg-white shadow-md rounded w-40 mt-2 z-50 dark:bg-gray-800 dark:border dark:border-gray-700 dark:shadow-gray-900/50">
                                 {['all', 'Career', 'Personal Growth', 'Relationships', 'Mindset'].map(item => (
                                     <p
                                         key={item}
@@ -61,7 +61,7 @@ const Lessons = () => {
                                             setCurrentPage(0);
                                             setActiveFilter(null);
                                         }}
-                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
                                     >
                                         {item}
                                     </p>
@@ -74,13 +74,13 @@ const Lessons = () => {
                     <div className="relative">
                         <button
                             onClick={() => setActiveFilter(activeFilter === 'tone' ? null : 'tone')}
-                            className="flex items-center gap-1 font-semibold border-b-2 border-transparent hover:border-primary"
+                            className="flex items-center gap-1 font-semibold border-b-2 border-transparent hover:border-primary dark:text-gray-300 dark:hover:border-teal-400 dark:hover:text-teal-400"
                         >
-                            Emotional Tone <IoMdArrowDropdown />
+                            Emotional Tone <IoMdArrowDropdown className="dark:text-gray-400" />
                         </button>
 
                         {activeFilter === 'tone' && (
-                            <div className="absolute bg-white shadow-md rounded w-40 mt-2 z-50">
+                            <div className="absolute bg-white shadow-md rounded w-40 mt-2 z-50 dark:bg-gray-800 dark:border dark:border-gray-700 dark:shadow-gray-900/50">
                                 {['all', 'Motivational', 'Reflective', 'Sad', 'Inspiring'].map(tone => (
                                     <p
                                         key={tone}
@@ -89,7 +89,7 @@ const Lessons = () => {
                                             setCurrentPage(0);
                                             setActiveFilter(null);
                                         }}
-                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
                                     >
                                         {tone}
                                     </p>
@@ -102,19 +102,19 @@ const Lessons = () => {
                     <div className="relative">
                         <button
                             onClick={() => setActiveFilter(activeFilter === 'sort' ? null : 'sort')}
-                            className="flex items-center gap-1 font-semibold border-b-2 border-transparent hover:border-primary"
+                            className="flex items-center gap-1 font-semibold border-b-2 border-transparent hover:border-primary dark:text-gray-300 dark:hover:border-teal-400 dark:hover:text-teal-400"
                         >
-                            Sort By <IoMdArrowDropdown />
+                            Sort By <IoMdArrowDropdown className="dark:text-gray-400" />
                         </button>
 
                         {activeFilter === 'sort' && (
-                            <div className="absolute bg-white shadow-md rounded w-40 mt-2 z-50">
+                            <div className="absolute bg-white shadow-md rounded w-40 mt-2 z-50 dark:bg-gray-800 dark:border dark:border-gray-700 dark:shadow-gray-900/50">
                                 <p
                                     onClick={() => {
                                         setSortBy('newest');
                                         setActiveFilter(null);
                                     }}
-                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
                                 >
                                     Newest
                                 </p>
@@ -123,7 +123,7 @@ const Lessons = () => {
                                         setSortBy('mostSaved');
                                         setActiveFilter(null);
                                     }}
-                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
                                 >
                                     Most Saved
                                 </p>
@@ -136,7 +136,7 @@ const Lessons = () => {
                 <input
                     type="text"
                     placeholder="Search lessons..."
-                    className="input input-bordered w-full md:w-64"
+                    className="input input-bordered w-full md:w-64 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-400"
                     value={search}
                     onChange={(e) => {
                         setSearch(e.target.value);
@@ -157,7 +157,7 @@ const Lessons = () => {
                 {currentPage > 0 && (
                     <button
                         onClick={() => setCurrentPage(currentPage - 1)}
-                        className="btn bg-secondary text-white"
+                        className="btn bg-secondary text-white dark:bg-teal-700 dark:hover:bg-teal-600 dark:border-0"
                     >
                         Prev
                     </button>
@@ -167,7 +167,7 @@ const Lessons = () => {
                     <button
                         key={i}
                         onClick={() => setCurrentPage(i)}
-                        className={`btn ${i === currentPage ? "bg-primary text-white" : "bg-secondary text-white"}`}
+                        className={`btn ${i === currentPage ? "bg-primary text-white dark:bg-teal-600" : "bg-secondary text-white dark:bg-teal-700 dark:hover:bg-teal-600"} dark:border-0`}
                     >
                         {i + 1}
                     </button>
@@ -176,7 +176,7 @@ const Lessons = () => {
                 {currentPage < totalPage - 1 && (
                     <button
                         onClick={() => setCurrentPage(currentPage + 1)}
-                        className="btn bg-secondary text-white"
+                        className="btn bg-secondary text-white dark:bg-teal-700 dark:hover:bg-teal-600 dark:border-0"
                     >
                         Next
                     </button>

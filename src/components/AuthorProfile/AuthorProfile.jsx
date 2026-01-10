@@ -1,7 +1,7 @@
 import { useParams,useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { FaBook, FaCrown, FaArrowLeft } from 'react-icons/fa';
-import coverImg from '../../assets/coverImage.jpg';
+// import coverImg from '../../assets/coverImage.jpg';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LessonCard from '../Home/Lessons/LessonCard';
 import LoadingSpinner from '../Shared/LoadingSpinner';
@@ -44,9 +44,9 @@ const author = authorResponse;
       </button>
 
       {/* Author Profile */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+      <div className="bg-white dark:bg-gray-800  rounded-2xl shadow-lg overflow-hidden mb-8">
         <img 
-          src={coverImg} 
+          src="https://i.ibb.co.com/tTQQHK4J/premium-photo-1683309567322-e95b9f182dcc-q-80-w-1170-auto-format-fit-crop-ixlib-rb-4-1.jpg" 
           alt="Cover" 
           className="w-full h-48 object-cover"
         />
@@ -60,7 +60,7 @@ const author = authorResponse;
             />
             
             <h1 className="text-2xl font-bold mt-4">{author.name}</h1>
-            <p className="text-gray-600">{author.email}</p>
+            <p className="text-gray-600 dark:text-gray-400">{author.email}</p>
             
             {/* Premium Badge*/}
             {author.isPremium && (
@@ -74,7 +74,7 @@ const author = authorResponse;
           <div className="flex justify-center mt-6">
             <div className="text-center">
               <p className="text-2xl font-bold">{lessons.length}</p>
-              <p className="text-gray-600">Public Lessons</p>
+              <p className="text-gray-600 dark:text-gray-400">Public Lessons</p>
             </div>
           </div>
         </div>

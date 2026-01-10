@@ -1,5 +1,5 @@
 import useAuth from '../../../hooks/useAuth'
-import coverImg from '../../../assets/coverImage.jpg'
+// import coverImg from '../../../assets/coverImage.jpg'
 import LessonCard from '../../../components/Home/Lessons/LessonCard';
 import { useQuery } from '@tanstack/react-query';
 import useRole from '../../../hooks/useRole';
@@ -36,9 +36,9 @@ const Profile = () => {
   return (
     <div className="px-4 py-10">
       {/* Profile Header */}
-      <div className="bg-white shadow-lg rounded-2xl max-w-4xl mx-auto">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl max-w-4xl mx-auto">
         <img
-          src={coverImg}
+          src="https://i.ibb.co.com/tTQQHK4J/premium-photo-1683309567322-e95b9f182dcc-q-80-w-1170-auto-format-fit-crop-ixlib-rb-4-1.jpg"
           alt="cover"
           className="w-full mb-4 rounded-t-lg h-56 object-cover"
         />
@@ -65,7 +65,7 @@ const Profile = () => {
             </p>
           ) : null}
 
-          <p className="text-gray-600">{user?.email}</p>
+          <p className="text-gray-600 dark:text-gray-300">{user?.email}</p>
 
           {/* Stats (User only) */}
           {!isAdmin && (
@@ -81,7 +81,7 @@ const Profile = () => {
             </div>
           )}
 
-          <Link to={'/update-profile'} className="bg-secondary px-6 py-2 rounded-lg text-white mt-4 hover:bg-teal-700">
+          <Link to={'/update-profile'} className="bg-[#02a2a2] px-6 py-2 rounded-lg text-white mt-4 hover:bg-teal-700">
             Update Profile
           </Link>
         </div>

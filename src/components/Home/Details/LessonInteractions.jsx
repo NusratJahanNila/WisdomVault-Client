@@ -44,14 +44,14 @@ const LessonInteractions = ({ lesson, refetch }) => {
  
 
   return (
-    <div className="mt-6 p-4 rounded-xl bg-base-200 shadow-sm flex flex-wrap gap-4 items-center justify-between">
+    <div className="mt-6 p-4 rounded-xl bg-base-200 shadow-sm flex flex-wrap gap-4 items-center justify-between dark:bg-gray-800 dark:border dark:border-gray-700 dark:shadow-gray-900/50">
 
       {/* Likes */}
       <button
         onClick={handleLike}
-        className={`btn btn-sm ${liked ? "btn-error" : "btn-outline"}`}
+        className={`btn btn-sm ${liked ? "btn-error" : "btn-outline"} dark:border-gray-600 dark:hover:bg-gray-700`}
       >
-        <FaHeart size={18} className={liked ? "fill-white" : ""} />
+        <FaHeart size={18} className={liked ? "fill-white" : "dark:text-gray-300"} />
         {lesson.likesCount}
       </button>
 

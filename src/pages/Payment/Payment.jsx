@@ -107,14 +107,14 @@ const Payment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-teal-50 py-12 px-4">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-teal-50 py-12 px-4 dark:from-gray-900 dark:to-gray-900">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Upgrade to <span className="text-primary">Premium</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 dark:text-white">
+            Upgrade to <span className="text-primary dark:text-teal-400">Premium</span>
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
             Unlock exclusive features and take your wisdom journey to the next level
           </p>
         </div>
@@ -122,53 +122,53 @@ const Payment = () => {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Free Plan */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-200">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/50">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">Free Plan</h3>
-              <div className="text-4xl font-bold text-gray-900 mb-2">৳0</div>
-              <p className="text-gray-500">Forever free</p>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2 dark:text-white">Free Plan</h3>
+              <div className="text-4xl font-bold text-gray-900 mb-2 dark:text-white">৳0</div>
+              <p className="text-gray-500 dark:text-gray-400">Forever free</p>
             </div>
             
             <ul className="space-y-4 mb-8">
               {features.slice(0, 4).map((item, idx) => (
                 <li key={idx} className="flex items-center gap-3">
                   {item.freeIcon}
-                  <span className="flex-1 text-gray-700">{item.feature}</span>
-                  <span className="text-gray-600 font-medium">{item.free}</span>
+                  <span className="flex-1 text-gray-700 dark:text-gray-300">{item.feature}</span>
+                  <span className="text-gray-600 font-medium dark:text-gray-400">{item.free}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Premium Plan */}
-          <div className="bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl shadow-xl p-8 border-2 border-[#F69074] relative overflow-hidden">
+          <div className="bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl shadow-xl p-8 border-2 border-[#F69074] relative overflow-hidden dark:from-teal-900 dark:to-teal-800 dark:border-teal-600">
             {/* Popular Badge */}
-            <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 rounded-bl-lg font-semibold">
+            <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 rounded-bl-lg font-semibold dark:bg-teal-700">
               Most Popular
             </div>
             
             <div className="text-center mb-8">
               <div className="flex items-center justify-center gap-2 mb-2">
-                <FaCrown className="text-primary text-2xl" />
-                <h3 className="text-2xl font-bold text-gray-900">Premium Plan</h3>
+                <FaCrown className="text-primary text-2xl dark:text-teal-400" />
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Premium Plan</h3>
               </div>
-              <div className="text-4xl font-bold text-gray-900 mb-2">৳1500</div>
-              <p className="text-gray-600">One-time payment • Lifetime access</p>
+              <div className="text-4xl font-bold text-gray-900 mb-2 dark:text-white">৳1500</div>
+              <p className="text-gray-600 dark:text-gray-400">One-time payment • Lifetime access</p>
             </div>
             
             <ul className="space-y-4 mb-8">
               {features.map((item, idx) => (
                 <li key={idx} className="flex items-center gap-3">
                   {item.premiumIcon}
-                  <span className="flex-1 text-gray-800 font-medium">{item.feature}</span>
-                  <span className="text-gray-700">{item.premium}</span>
+                  <span className="flex-1 text-gray-800 font-medium dark:text-white">{item.feature}</span>
+                  <span className="text-gray-700 dark:text-gray-300">{item.premium}</span>
                 </li>
               ))}
             </ul>
             
             <button
               onClick={handleUpgrade}
-              className="btn bg-linear-to-r from-primary to-amber-500 hover:from-primary hover:to-amber-600 text-white border-0 w-full text-lg font-semibold py-4"
+              className="btn bg-linear-to-r from-primary to-amber-500 hover:from-primary hover:to-amber-600 text-white border-0 w-full text-lg font-semibold py-4 dark:from-teal-700 dark:to-teal-600 dark:hover:from-teal-600 dark:hover:to-teal-500"
             >
               <FaCrown className="mr-2" />
               Upgrade to Premium
@@ -177,14 +177,14 @@ const Payment = () => {
         </div>
 
         {/* banner */}
-        <div className="mt-12 p-8 rounded-2xl bg-linear-to-r from-teal-500 to-teal-700 text-white text-center">
+        <div className="mt-12 p-8 rounded-2xl bg-linear-to-r from-teal-500 to-teal-700 text-white text-center dark:from-teal-800 dark:to-teal-900">
           <h3 className="text-2xl font-bold mb-4">Ready to unlock premium wisdom?</h3>
-          <p className="mb-6 max-w-2xl mx-auto">
+          <p className="mb-6 max-w-2xl mx-auto dark:text-teal-100">
             Join thousands of members who have transformed their learning experience with premium access.
           </p>
           <button
             onClick={handleUpgrade}
-            className="btn bg-white text-teal-600 hover:bg-gray-100 border-0 text-lg font-semibold px-8"
+            className="btn bg-white text-teal-600 hover:bg-gray-100 border-0 text-lg font-semibold px-8 dark:bg-teal-200 dark:text-teal-800 dark:hover:bg-teal-300"
           >
             <FaCrown className="mr-2" />
             Upgrade Now - ৳1500

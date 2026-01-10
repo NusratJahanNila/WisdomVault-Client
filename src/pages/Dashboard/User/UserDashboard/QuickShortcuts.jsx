@@ -36,10 +36,10 @@ const QuickShortcuts = () => {
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 lg:col-span-1 border border-gray-100">
+    <div className="bg-white rounded-2xl shadow-lg p-6 lg:col-span-1 border border-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/50">
       <div className="mb-6">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">Quick Actions</h3>
-        <p className="text-gray-500 text-sm">Navigate quickly to different sections</p>
+        <h3 className="text-xl font-bold text-gray-800 mb-2 dark:text-white">Quick Actions</h3>
+        <p className="text-gray-500 text-sm dark:text-gray-300">Navigate quickly to different sections</p>
       </div>
 
       <div className="space-y-4">
@@ -47,28 +47,28 @@ const QuickShortcuts = () => {
           <Link
             key={link.to}
             to={link.to}
-            className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all duration-200 hover:scale-[1.02] bg-linear-to-r from-white to-gray-50 hover:from-amber-50 hover:to-white"
+            className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all duration-200 hover:scale-[1.02] bg-linear-to-r from-white to-gray-50 hover:from-amber-50 hover:to-white dark:from-gray-800 dark:to-gray-900 dark:hover:from-teal-900 dark:hover:to-gray-800 dark:border-gray-700 dark:hover:border-teal-600"
           >
             <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-${link.color}-50 group-hover:bg-${link.color}-100 transition-colors`}>
-                <div className="text-2xl">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-${link.color}-50 group-hover:bg-${link.color}-100 transition-colors dark:bg-gray-700 dark:group-hover:bg-gray-600`}>
+                <div className="text-2xl dark:text-gray-200">
                   {link.icon}
                 </div>
               </div>
               
               <div>
-                <span className="font-semibold text-gray-800 group-hover:text-primary transition-colors">
+                <span className="font-semibold text-gray-800 group-hover:text-primary transition-colors dark:text-white dark:group-hover:text-teal-300">
                   {link.label}
                 </span>
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-xs text-gray-400 mt-1 dark:text-gray-500">
                   Click to navigate
                 </p>
               </div>
             </div>
             
             <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-              <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
-                <FaArrowRight className="text-primary text-sm" />
+              <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center dark:bg-teal-800">
+                <FaArrowRight className="text-primary text-sm dark:text-teal-300" />
               </div>
             </div>
           </Link>
@@ -76,8 +76,8 @@ const QuickShortcuts = () => {
       </div>
 
       {/* Optional: Add a helpful tip */}
-      <div className="mt-8 p-4 bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
-        <p className="text-sm text-blue-700 flex items-center gap-2">
+      <div className="mt-8 p-4 bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 dark:from-blue-900 dark:to-indigo-900 dark:border-blue-800">
+        <p className="text-sm text-blue-700 flex items-center gap-2 dark:text-blue-300">
           <span className="font-medium">💡 Quick Tip:</span>
           Use these shortcuts for faster navigation to frequently used pages
         </p>

@@ -19,29 +19,37 @@ const TodayLessonsTable = () => {
     );
 
     return (
-        <div className="bg-white p-5 rounded-lg shadow">
-            <h3 className="font-bold text-lg mb-4">Today's Lessons</h3>
+        <div className="bg-white p-5 rounded-lg shadow dark:bg-gray-800 dark:border dark:border-gray-700 dark:shadow-gray-900/50">
+            <h3 className="font-bold text-lg mb-4 dark:text-white">Today's Lessons</h3>
 
             <table className="table w-full">
                 <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Emotional Tone</th>
-                        <th>Privacy</th>
-                        <th>Author</th>
-                        <th>Email</th>
+                    <tr className="dark:bg-gray-700">
+                        <th className="dark:text-gray-300 dark:border-gray-600">Title</th>
+                        <th className="dark:text-gray-300 dark:border-gray-600">Category</th>
+                        <th className="dark:text-gray-300 dark:border-gray-600">Emotional Tone</th>
+                        <th className="dark:text-gray-300 dark:border-gray-600">Privacy</th>
+                        <th className="dark:text-gray-300 dark:border-gray-600">Author</th>
+                        <th className="dark:text-gray-300 dark:border-gray-600">Email</th>
                     </tr>
                 </thead>
                 <tbody>
                     {todayLessons.map(lesson => (
-                        <tr key={lesson._id}>
-                            <td>{lesson.title}</td>
-                            <td>{lesson.category}</td>
-                            <td>{lesson.emotionalTone}</td>
-                            <td>{lesson.privacy}</td>
-                            <td>{lesson.authorName}</td>
-                            <td>{lesson.authorEmail}</td>
+                        <tr key={lesson._id} className="hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-600">
+                            <td className="dark:text-gray-300 dark:border-gray-600">{lesson.title}</td>
+                            <td className="dark:text-gray-300 dark:border-gray-600">{lesson.category}</td>
+                            <td className="dark:text-gray-300 dark:border-gray-600">{lesson.emotionalTone}</td>
+                            <td className="dark:text-gray-300 dark:border-gray-600">
+                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                    lesson.privacy === 'public' 
+                                        ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' 
+                                        : 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                                }`}>
+                                    {lesson.privacy}
+                                </span>
+                            </td>
+                            <td className="dark:text-gray-300 dark:border-gray-600">{lesson.authorName}</td>
+                            <td className="dark:text-gray-300 dark:border-gray-600">{lesson.authorEmail}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -55,46 +55,52 @@ const ManageUsers = () => {
     // loading
     if (isLoading) return <LoadingSpinner />
     return (
-        <div className="p-10 ">
-            <div className="p-6 bg-white rounded-xl shadow">
-                <h2 className="text-2xl font-bold mb-4">Manage Users</h2>
+        <div className="p-10 dark:bg-gray-900 min-h-screen">
+            <div className="p-6 bg-white rounded-xl shadow dark:bg-gray-800 dark:border dark:border-gray-700 dark:shadow-gray-900/50">
+                <h2 className="text-2xl font-bold mb-4 dark:text-white">Manage Users</h2>
 
                 <div className="overflow-x-auto">
-                    <table className="table table-zebra w-full">
-                        <thead>
+                    <table className="table table-zebra w-full dark:table-zebra-dark">
+                        <thead className="dark:bg-gray-700">
                             <tr>
-                                <th>#</th>
-                                <th>User Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Total Lessons</th>
-                                <th>Actions</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">#</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">User Name</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Email</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Role</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Total Lessons</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Actions</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             {users.map((user, index) => (
-                                <tr key={user._id}>
-                                    <th>{index + 1}</th>
-                                    <td className="font-semibold">{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.role}</td>
-                                    <td>{user.lessonCount}</td>
-
-
+                                <tr key={user._id} className="dark:hover:bg-gray-700 dark:border-gray-600">
+                                    <th className="dark:text-gray-300 dark:border-gray-600">{index + 1}</th>
+                                    <td className="font-semibold dark:text-white">{user.name}</td>
+                                    <td className="dark:text-gray-300">{user.email}</td>
+                                    <td className="dark:text-gray-300">
+                                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                            user.role === 'admin' 
+                                                ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' 
+                                                : 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                                        }`}>
+                                            {user.role}
+                                        </span>
+                                    </td>
+                                    <td className="dark:text-gray-300">{user.lessonCount}</td>
 
                                     {/* Actions */}
-                                    <td className="flex gap-2">
+                                    <td className="flex gap-2 dark:border-gray-600">
                                         <button
                                             onClick={() => openModal(user)}
-                                            className="btn btn-xs bg-secondary text-white"
+                                            className="btn btn-xs bg-secondary text-white dark:bg-teal-700 dark:hover:bg-teal-600"
                                         >
                                             Update Role
                                         </button>
                                         
 
                                         <button
-                                            className="btn btn-xs btn-error text-white"
+                                            className="btn btn-xs btn-error text-white dark:bg-red-700 dark:hover:bg-red-600"
                                             onClick={() => handleDelete(user.email)}
                                         >
                                             Delete

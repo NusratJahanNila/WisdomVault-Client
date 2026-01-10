@@ -124,10 +124,10 @@ const ManageLessons = () => {
     // Show loading
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
-        <div className="p-6">
+        <div className="p-6 dark:bg-gray-900 min-h-screen">
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Manage Lessons</h1>
-                <p className="text-gray-600">Review, feature, or remove lessons created by users</p>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2 dark:text-white">Manage Lessons</h1>
+                <p className="text-gray-600 dark:text-gray-400">Review, feature, or remove lessons created by users</p>
             </div>
 
             {/* Stats Cards */}
@@ -144,78 +144,78 @@ const ManageLessons = () => {
             ></ManageFilter>
 
             {/* Lessons Table */}
-            <div className="bg-white shadow-lg rounded-xl overflow-hidden">
+            <div className="bg-white shadow-lg rounded-xl overflow-hidden dark:bg-gray-800 dark:border dark:border-gray-700 dark:shadow-gray-900/50">
                 <div className="overflow-x-auto">
                     <table className="table">
-                        <thead className="bg-gray-50">
+                        <thead className="bg-gray-50 dark:bg-gray-700">
                             <tr>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Category</th>
-                                <th>Privacy</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Title</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Author</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Category</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Privacy</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Status</th>
+                                <th className="dark:text-gray-300 dark:border-gray-600">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {filteredLessons.length > 0 ? (
                                 filteredLessons.map(lesson => (
-                                    <tr key={lesson._id} className="hover:bg-gray-50">
-                                        <td>
-                                            <div className="font-medium max-w-xs truncate">{lesson.title}</div>
-                                            <div className="text-xs text-gray-500">
+                                    <tr key={lesson._id} className="hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-600">
+                                        <td className="dark:border-gray-600">
+                                            <div className="font-medium max-w-xs truncate dark:text-white">{lesson.title}</div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">
                                                 {new Date(lesson.createdAt).toLocaleDateString()}
                                             </div>
                                         </td>
-                                        <td>
+                                        <td className="dark:border-gray-600">
                                             <div className="flex items-center gap-2">
                                                 <div className="avatar">
-                                                    <div className="w-8 h-8 rounded-full">
+                                                    <div className="w-8 h-8 rounded-full border border-gray-300 dark:border-gray-600">
                                                         <img src={lesson.authorPhoto} alt={lesson.authorName} />
                                                     </div>
                                                 </div>
-                                                <span className="text-sm">{lesson.authorName}</span>
+                                                <span className="text-sm dark:text-gray-300">{lesson.authorName}</span>
                                             </div>
                                         </td>
-                                        <td>
-                                            <span className="badge ">{lesson.category}</span>
+                                        <td className="dark:border-gray-600">
+                                            <span className="badge dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600">{lesson.category}</span>
                                         </td>
-                                        <td>
-                                            <span className={`badge ${lesson.privacy === 'public' ? 'badge-success' : 'badge-info'}`}>
+                                        <td className="dark:border-gray-600">
+                                            <span className={`badge ${lesson.privacy === 'public' ? 'badge-success' : 'badge-info'} dark:border-0`}>
                                                 {lesson.privacy === 'public' ? <FaEye className="mr-1" /> : <FaEyeSlash className="mr-1" />}
                                                 {lesson.privacy}
                                             </span>
                                         </td>
-                                        <td>
-                                            <span className={`badge ${lesson.isFeatured ? 'badge-warning' : 'badge-outline'}`}>
+                                        <td className="dark:border-gray-600">
+                                            <span className={`badge ${lesson.isFeatured ? 'badge-warning' : 'badge-outline'} dark:border-gray-600`}>
                                                 {lesson.isFeatured ? 'Featured' : 'Regular'}
                                             </span>
                                         </td>
-                                        <td>
+                                        <td className="dark:border-gray-600">
                                             <div className="flex gap-2">
                                                 {/* Feature/Unfeature Button */}
                                                 <button
                                                     onClick={() => handleToggleFeatured(lesson._id, lesson.isFeatured)}
-                                                    className={`btn btn-xs ${lesson.isFeatured ? 'btn-warning' : 'btn-outline'}`}
+                                                    className={`btn btn-xs ${lesson.isFeatured ? 'btn-warning' : 'btn-outline'} dark:border-gray-600 dark:hover:bg-gray-700`}
                                                     title={lesson.isFeatured ? 'Remove from featured' : 'Feature this lesson'}
                                                 >
-                                                    <FaStar className={lesson.isFeatured ? 'fill-white' : ''} />
+                                                    <FaStar className={lesson.isFeatured ? 'fill-white' : 'dark:text-gray-300'} />
                                                 </button>
 
                                                 {/* Mark as Reviewed Button */}
                                                 <button
                                                     onClick={() => handleMarkReviewed(lesson._id)}
-                                                    className={`btn btn-xs ${lesson.isReviewed ? 'bg-gray-300 text-gray-600' : 'btn-success'}`}
+                                                    className={`btn btn-xs ${lesson.isReviewed ? 'bg-gray-300 text-gray-600' : 'btn-success'} dark:border-gray-600`}
                                                     title={lesson.isReviewed ? "Already reviewed" : "Mark as reviewed"}
                                                     disabled={lesson.isReviewed}
                                                 >
-                                                    <FaCheckCircle className={lesson.isReviewed ? 'text-gray-500' : 'text-white'} />
+                                                    <FaCheckCircle className={lesson.isReviewed ? 'text-gray-500 dark:text-gray-400' : 'text-white'} />
                                                 </button>
 
                                                 {/* Delete Button */}
                                                 <button
                                                     onClick={() => handleDeleteLesson(lesson._id, lesson.title)}
-                                                    className="btn btn-xs btn-error"
+                                                    className="btn btn-xs btn-error dark:bg-red-700 dark:hover:bg-red-600 dark:border-0"
                                                     title="Delete lesson"
                                                 >
                                                     <FaTrash />
@@ -226,7 +226,7 @@ const ManageLessons = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="7" className="text-center py-8 text-gray-500">
+                                    <td colSpan="7" className="text-center py-8 text-gray-500 dark:text-gray-400 dark:border-gray-600">
                                         No lessons found {lessons.length === 0 ? 'in the system' : 'with current filters'}
                                     </td>
                                 </tr>

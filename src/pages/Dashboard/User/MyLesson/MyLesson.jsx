@@ -90,92 +90,91 @@ const MyLesson = () => {
     if (isLoading) return <LoadingSpinner />
 
     return (
-        <div className="p-10 ">
-            <div className="p-6 bg-white rounded-xl shadow">
-                <h2 className="text-2xl font-bold mb-4">My Lessons</h2>
+    <div className="p-10 dark:bg-gray-900 dark:text-gray-100">
+        <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow dark:shadow-gray-900/50">
+            <h2 className="text-2xl font-bold mb-4 dark:text-white">My Lessons</h2>
 
-                <div className="overflow-x-auto">
-                    <table className="table table-zebra w-full">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Lesson Title</th>
-                                <th>Category</th>
-                                <th>Privacy</th>
-                                <th>Access</th>
-                                <th>Likes</th>
-                                <th>Favorites</th>
-                                <th>Created At</th>
-                                <th>Actions</th>
+            <div className="overflow-x-auto">
+                <table className="table table-zebra w-full dark:[&_th]:bg-gray-700 dark:[&_th]:text-gray-200 dark:[&_th]:border-gray-600 dark:[&_td]:border-gray-700">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Lesson Title</th>
+                            <th>Category</th>
+                            <th>Privacy</th>
+                            <th>Access</th>
+                            <th>Likes</th>
+                            <th>Favorites</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {lessons.map((lesson, index) => (
+                            <tr key={lesson._id}>
+                                <th className="dark:bg-gray-800 dark:text-gray-300">{index + 1}</th>
+                                <td className="font-semibold dark:text-gray-200">{lesson.title}</td>
+                                <td className="dark:text-gray-300">{lesson.category}</td>
+
+                                {/* Toggle Privacy */}
+                                <td className="dark:text-gray-300">
+                                    <button
+                                        className="btn btn-xs dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600"
+                                        onClick={() => handleTogglePrivacy(lesson._id, lesson.privacy)}
+                                    >
+                                        {lesson.privacy === "public" ? "Public" : "Private"}
+                                    </button>
+                                </td>
+
+                                {/* Toggle Access */}
+                                <td className="dark:text-gray-300">
+                                    <button
+                                        className="btn btn-sm dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600"
+                                        disabled={!userData?.isPremium}
+                                        onClick={() => handleToggleAccess(lesson._id, lesson.accessLevel)}
+                                    >
+                                        {lesson.accessLevel === "free" ? "Free" : "Premium"}
+                                    </button>
+
+                                    {!userData?.isPremium && (
+                                        <div className="text-xs text-warning dark:text-yellow-400">
+                                            Premium only
+                                        </div>
+                                    )}
+                                </td>
+
+                                {/* Stats */}
+                                <td className="dark:text-gray-300">{lesson.likesCount}</td>
+                                <td className="dark:text-gray-300">{lesson.favoritesCount}</td>
+                                <td className="dark:text-gray-300">{lesson.createdAt}</td>
+
+                                {/* Actions */}
+                                <td className="flex gap-2 dark:text-gray-300">
+                                    <Link
+                                        className="btn btn-xs bg-secondary text-white dark:bg-teal-700 dark:hover:bg-teal-600"
+                                        to={`/lesson-details/${lesson._id}`}
+                                    >
+                                        Details
+                                    </Link>
+
+                                    <UpdateLesson lesson={lesson} refetch={refetch} />
+
+                                    <button
+                                        className="btn btn-xs btn-error text-white dark:bg-red-700 dark:hover:bg-red-600"
+                                        onClick={() => handleDelete(lesson._id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
-                        </thead>
-
-                        <tbody>
-                            {lessons.map((lesson, index) => (
-                                <tr key={lesson._id}>
-                                    <th>{index + 1}</th>
-                                    <td className="font-semibold">{lesson.title}</td>
-                                    <td>{lesson.category}</td>
-
-                                    {/* Toggle Privacy */}
-                                    <td>
-                                        <button
-                                            className="btn btn-xs"
-                                            onClick={() => handleTogglePrivacy(lesson._id, lesson.privacy)}
-                                        >
-                                            {lesson.privacy === "public" ? "Public" : "Private"}
-                                        </button>
-                                    </td>
-
-                                    {/* Toggle Access */}
-                                    <td>
-                                        <button
-                                            className="btn btn-sm"
-                                            disabled={!userData?.isPremium}
-                                            onClick={() => handleToggleAccess(lesson._id, lesson.accessLevel)}
-                                        >
-                                            {lesson.accessLevel === "free" ? "Free" : "Premium"}
-                                        </button>
-
-
-                                        {!userData?.isPremium && (
-                                            <div className="text-xs text-warning">
-                                                Premium only
-                                            </div>
-                                        )}
-                                    </td>
-
-                                    {/* Stats */}
-                                    <td>{lesson.likesCount}</td>
-                                    <td>{lesson.favoritesCount}</td>
-                                    <td>{lesson.createdAt}</td>
-
-                                    {/* Actions */}
-                                    <td className="flex gap-2">
-                                        <Link
-                                            className="btn btn-xs bg-secondary text-white"
-                                            to={`/lesson-details/${lesson._id}`}
-                                        >
-                                            Details
-                                        </Link>
-
-                                        <UpdateLesson lesson={lesson} refetch={refetch} />
-
-                                        <button
-                                            className="btn btn-xs btn-error text-white"
-                                            onClick={() => handleDelete(lesson._id)}
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
-    );
+    </div>
+);
 };
 
 

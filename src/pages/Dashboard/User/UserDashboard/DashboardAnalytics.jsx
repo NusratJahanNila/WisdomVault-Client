@@ -35,7 +35,7 @@ const DashboardAnalytics = () => {
   }, []);
 
   return (
-    <div className="bg-white shadow rounded-xl p-6">
+    <div className="bg-white dark:bg-gray-800 shadow rounded-xl p-6">
       <h3 className="text-lg font-bold mb-4">Your Contribution Trend</h3>
 
       <ResponsiveContainer width="100%" height={300}>
