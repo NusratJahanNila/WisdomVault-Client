@@ -23,6 +23,9 @@ import ManageLessons from '../pages/Dashboard/Admin/ManageLessons/ManageLessons'
 import UpdateLesson from '../pages/Dashboard/User/UpdateLesson/UpdateLesson'
 import UpdateProfile from '../pages/Dashboard/Profile/UpdateProfile'
 import AdminRoute from './AdminRoute'
+import AboutPage from '../pages/About/AboutPage'
+import ContactPage from '../pages/Contact/ContactPage'
+import HelpPage from '../pages/Help/HelpPage'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -36,6 +39,18 @@ export const router = createBrowserRouter([
       {
         path: '/public-lessons',
         element:<PublicLessons />
+      },
+      {
+        path: '/about',
+        element:<AboutPage />
+      },
+      {
+        path: '/contact',
+        element:<ContactPage />
+      },
+      {
+        path: '/help',
+        element:<HelpPage />
       },
       {
         path: '/lesson-details/:id',

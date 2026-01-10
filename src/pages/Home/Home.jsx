@@ -14,8 +14,8 @@ const Home = () => {
         <div>
             <Banner />
             <PlatformStats />
-            <FeaturedLessons />
             <HowItWorks/>
+            <FeaturedLessons />
             <WhyLerningFromLifeLesson/>
             <TopContributors />
             <div className="mb-10">

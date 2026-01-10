@@ -6,7 +6,7 @@ import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/avater.png'
 import logo from '../../../assets/WisdomVault.png'
 import useRole from '../../../hooks/useRole'
-import { Sun, Moon } from 'lucide-react' // Added theme icons
+import { Sun, Moon } from 'lucide-react' 
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -61,6 +61,16 @@ const Navbar = () => {
             <NavLink to={'/public-lessons'} className={({ isActive }) =>
                 `font-medium text-lg ${isActive ? 'text-[#F69074] dark:text-[#F69074] font-semibold' : 'text-[#02a2a2] dark:text-white hover:text-[#02a2a2] dark:hover:text-[#A0EBEB]'}`
             }>Public Lessons</NavLink>
+        </li>
+        <li>
+            <NavLink to={'/about'} className={({ isActive }) =>
+                `font-medium text-lg ${isActive ? 'text-[#F69074] dark:text-[#F69074] font-semibold' : 'text-[#02a2a2] dark:text-white hover:text-[#02a2a2] dark:hover:text-[#A0EBEB]'}`
+            }>About</NavLink>
+        </li>
+        <li>
+            <NavLink to={'/contact'} className={({ isActive }) =>
+                `font-medium text-lg ${isActive ? 'text-[#F69074] dark:text-[#F69074] font-semibold' : 'text-[#02a2a2] dark:text-white hover:text-[#02a2a2] dark:hover:text-[#A0EBEB]'}`
+            }>Contact</NavLink>
         </li>
 
         {
