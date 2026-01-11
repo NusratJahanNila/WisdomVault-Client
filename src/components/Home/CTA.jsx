@@ -18,7 +18,7 @@ const CTA = () => {
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            to="/register"
+                            to="/signup"
                             className="px-8 py-3 bg-white  text-gray-900 font-semibold rounded-lg hover:bg-[#028a8a] dark:hover:bg-[#028a8a] transition-colors duration-300 flex items-center justify-center gap-2"
                         >
                             Get Started Free
@@ -26,7 +26,7 @@ const CTA = () => {
                         </Link>
                         
                         <Link
-                            to="/pricing"
+                            to="/payment"
                             className="px-8 py-3 border-2 border-[#F69074] dark:border-[#F69074] text-[#F69074] hover:text-white dark:text-[#F69074] font-semibold rounded-lg hover:bg-[#F69074] dark:hover:bg-[#F69074]/10 transition-colors duration-300"
                         >
                             View Premium Plans

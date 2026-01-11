@@ -8,6 +8,8 @@ import HowItWorks from '../../components/Home/Lessons/HowItWorks';
 import PlatformStats from '../../components/Home/PlatformStats';
 import FAQ from '../../components/Home/FAQ';
 import CTA from '../../components/Home/CTA';
+import LifeLessonsSection from '../../components/Home/LessonsOrganized';
+import LessonsOrganized from '../../components/Home/LessonsOrganized';
 
 const Home = () => {
     return (
@@ -15,6 +17,7 @@ const Home = () => {
             <Banner />
             <PlatformStats />
             <HowItWorks/>
+            <LessonsOrganized/>
             <FeaturedLessons />
             <WhyLerningFromLifeLesson/>
             <TopContributors />

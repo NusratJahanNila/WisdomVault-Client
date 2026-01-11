@@ -2,7 +2,7 @@ import React from 'react';
 import { FaBrain, FaHeart, FaUsers, FaChartLine } from 'react-icons/fa';
 import { Link } from 'react-router';
 const WhyLerningFromLifeLesson = () => {
-    const benefits = [
+  const benefits = [
     {
       id: 1,
       icon: <FaBrain />,
@@ -51,8 +51,8 @@ const WhyLerningFromLifeLesson = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {benefits.map((benefit) => (
-            <div 
-              key={benefit.id} 
+            <div
+              key={benefit.id}
               className={`bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 ${benefit.border}`}
             >
               <div className="flex items-start space-x-4">
@@ -73,8 +73,14 @@ const WhyLerningFromLifeLesson = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Link to={'/add-lesson'} className="btn bg-secondary hover:bg-teal-600 text-white border-0 px-8">
+          <Link
+            to={'/dashboard/add-lesson'}
+            className="group inline-flex items-center gap-2 bg-[#02A2A2] hover:bg-[#028a8a] text-white border-0 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          >
             Start Documenting Your Wisdom
+            <span className="opacity-0 group-hover:opacity-100 -translate-x-2.5 group-hover:translate-x-0 transition-all duration-300">
+              →
+            </span>
           </Link>
         </div>
       </div>
