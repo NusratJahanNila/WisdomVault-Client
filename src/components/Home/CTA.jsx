@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const CTA = () => {
     return (
         <section className="py-16 px-6  dark:bg-gray-900 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto ">
+            <div className="max-w-6xl mx-auto ">
                 <div className="bg-[#02A2A2] dark:bg-gray-800 rounded-2xl p-8 md:p-12 text-center shadow-lg dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700">
                     {/* Header */}
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">

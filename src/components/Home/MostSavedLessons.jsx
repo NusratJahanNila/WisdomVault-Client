@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Container from '../Shared/Container';
 import LessonCard from './Lessons/LessonCard';
+import SectionHeader from '../Shared/SectionHeader/SectionHeader';
 
 const MostSavedLessons = () => {
 
@@ -16,20 +17,20 @@ const MostSavedLessons = () => {
     });
 
     return (
-        <Container className="mt-20">
-            <h2 className="text-2xl font-bold text-center mb-2">
-                ❤️ Most Saved Lessons
-            </h2>
-            <p className="text-center text-gray-600 mb-8">
-                Lessons the community loves the most
-            </p>
+        <div className="mt-20 max-w-6xl mx-auto">
+            <SectionHeader
+                subtitle="Community Favorites"
+                title="Most"
+                highlight="Saved Lessons"
+                description="Lessons the community loves the most"
+            />
 
             <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-3">
                 {lessons.map(lesson => (
                     <LessonCard key={lesson._id} lesson={lesson} />
                 ))}
             </div>
-        </Container>
+        </div>
     );
 };
 

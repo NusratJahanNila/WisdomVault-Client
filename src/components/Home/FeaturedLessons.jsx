@@ -32,7 +32,7 @@ const FeaturedLessons = () => {
 
     return (
         <section className="py-10 bg-secondary dark:bg-gray-800 transition-colors duration-300">
-            <div className="mx-auto px-4 container">
+            <div className="mx-auto p-2 max-w-6xl">
                 {/* Section Header */}
                 <div className="text-center">
                     <div className="inline-flex items-center justify-center gap-3 mb-4">

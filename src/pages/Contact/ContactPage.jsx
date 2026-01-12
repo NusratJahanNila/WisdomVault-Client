@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { 
-  ChevronRight, 
-  Mail, 
-  MessageCircle, 
-  Clock, 
-  Send, 
-  CheckCircle, 
+import {
+  ChevronRight,
+  Mail,
+  MessageCircle,
+  Clock,
+  Send,
+  CheckCircle,
   AlertCircle,
   Github,
   Facebook,
@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ChevronUp
 } from 'lucide-react';
+import SectionHeader from '../../components/Shared/SectionHeader/SectionHeader';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const ContactPage = () => {
       ...prev,
       [name]: value
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -44,40 +45,40 @@ const ContactPage = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
-    
+
     if (!formData.subject) {
       newErrors.subject = 'Please select a subject';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message must be at least 10 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setFormStatus('loading');
-    
+
     // Simulate API call
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -118,21 +119,16 @@ const ContactPage = () => {
     <div className="min-h-screen bg-base-100 dark:bg-gray-900 transition-colors duration-300">
 
       {/* Hero Section */}
-      <section className="py-6 lg:py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fade-in">
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
-              Get in Touch
-            </h1>
-            <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed transition-colors duration-300">
-              Have a question, suggestion, or just want to say hello? We'd love to hear from you. 
-              Our team is here to help make your WisdomVault experience amazing.
-            </p>
-          </div>
-        </div>
+      <section className="py-6 lg:py-16">
+        <SectionHeader
+          subtitle="Connect With Us"
+          title="Get in"
+          highlight="Touch"
+          description="Have a question, suggestion, or just want to say hello? We'd love to hear from you. Our team is here to help make your WisdomVault experience amazing."
+        />
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div className="max-w-6xl mx-auto px-2 sm:px-3 lg:px-4 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Form */}
           <div className="lg:col-span-2 ">
@@ -140,7 +136,7 @@ const ContactPage = () => {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
                 Send us a Message
               </h2>
-              
+
               {formStatus === 'success' && (
                 <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
@@ -149,7 +145,7 @@ const ContactPage = () => {
                   </p>
                 </div>
               )}
-              
+
               {formStatus === 'error' && (
                 <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center space-x-3">
                   <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
@@ -171,16 +167,15 @@ const ContactPage = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#02A2A2] focus:border-transparent transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white ${
-                        errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#02A2A2] focus:border-transparent transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+                        }`}
                       placeholder="Enter your full name"
                     />
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
                     )}
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Email Address *
@@ -191,9 +186,8 @@ const ContactPage = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#02A2A2] focus:border-transparent transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white ${
-                        errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#02A2A2] focus:border-transparent transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+                        }`}
                       placeholder="Enter your email address"
                     />
                     {errors.email && (
@@ -201,7 +195,7 @@ const ContactPage = () => {
                     )}
                   </div>
                 </div>
-                
+
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Subject *
@@ -211,9 +205,8 @@ const ContactPage = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#02A2A2] focus:border-transparent transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white ${
-                      errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#02A2A2] focus:border-transparent transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white ${errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+                      }`}
                   >
                     <option value="">Select a subject</option>
                     <option value="general">General Inquiry</option>
@@ -226,7 +219,7 @@ const ContactPage = () => {
                     <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.subject}</p>
                   )}
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Message *
@@ -237,16 +230,15 @@ const ContactPage = () => {
                     rows={6}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#02A2A2] focus:border-transparent transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white resize-none ${
-                      errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#02A2A2] focus:border-transparent transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white resize-none ${errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+                      }`}
                     placeholder="Tell us how we can help you..."
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>
                   )}
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={formStatus === 'loading'}
@@ -275,21 +267,21 @@ const ContactPage = () => {
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
                 Contact Information
               </h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <Mail className="w-6 h-6 text-[#F69074] mt-1" />
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white transition-colors duration-300">Email</h4>
-                    <a 
-                      href="mailto:hello@wisdomvault.tech" 
+                    <a
+                      href="mailto:hello@wisdomvault.tech"
                       className="text-[#02A2A2] hover:text-[#028a8a] transition-colors duration-200"
                     >
                       hello@wisdomvault.tech
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <Clock className="w-6 h-6 text-[#F69074] mt-1" />
                   <div>
@@ -299,7 +291,7 @@ const ContactPage = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <MessageCircle className="w-6 h-6 text-[#F69074] mt-1" />
                   <div>
@@ -310,7 +302,7 @@ const ContactPage = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                   Follow Us
@@ -335,7 +327,7 @@ const ContactPage = () => {
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
                 Quick Help
               </h3>
-              
+
               <div className="space-y-4">
                 {faqs.map((faq, index) => (
                   <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg">
@@ -352,7 +344,7 @@ const ContactPage = () => {
                         <ChevronDown className="w-5 h-5 text-gray-500" />
                       )}
                     </button>
-                    
+
                     {expandedFaq === index && (
                       <div className="px-4 pb-3">
                         <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
@@ -363,10 +355,10 @@ const ContactPage = () => {
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <Link 
-                  to="/help" 
+                <Link
+                  to="/help"
                   className="text-[#02A2A2] hover:text-[#028a8a] font-medium transition-colors duration-200 flex items-center space-x-2"
                 >
                   <span>View all help articles</span>

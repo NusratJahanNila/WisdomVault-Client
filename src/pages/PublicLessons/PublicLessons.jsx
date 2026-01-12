@@ -1,17 +1,22 @@
-
 import Lessons from '../../components/Home/Lessons/Lessons';
-import Container from '../../components/Shared/Container';
+import SectionHeader from '../../components/Shared/SectionHeader/SectionHeader';
 
 const PublicLessons = () => {
 
     return (
-        <section className='max-w-7xl mx-auto dark:bg-gray-900 pt-6'>
-            <h2 className='text-center text-3xl font-bold text-gray-800 dark:text-white'>Public Lessons</h2>
-            <div className="py-10 dark:bg-gray-900">
-                <Lessons></Lessons>
-            </div>
-
-        </section>
+        <div className="dark:bg-gray-900">
+            <section className='max-w-6xl mx-auto  pt-16'>
+                <SectionHeader
+                    subtitle="Community Wisdom"
+                    title="Public"
+                    highlight="Lessons"
+                    description="Discover wisdom shared by our community"
+                />
+                <div className="py-10 dark:bg-gray-900">
+                    <Lessons></Lessons>
+                </div>
+            </section>
+        </div>
     );
 };
 

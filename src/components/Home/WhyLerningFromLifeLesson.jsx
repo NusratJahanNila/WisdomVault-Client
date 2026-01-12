@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaBrain, FaHeart, FaUsers, FaChartLine } from 'react-icons/fa';
 import { Link } from 'react-router';
+import SectionHeader from '../Shared/SectionHeader/SectionHeader';
 const WhyLerningFromLifeLesson = () => {
   const benefits = [
     {
@@ -40,14 +41,12 @@ const WhyLerningFromLifeLesson = () => {
   return (
     <section className="py-12 md:py-20 dark:bg-gray-800">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">
-            Why Learning From <span className="text-[#F69074] dark:text-[#F69074]">Life Matters</span>
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Transform experiences into wisdom that shapes your future
-          </p>
-        </div>
+        <SectionHeader
+          subtitle="Personal Growth"
+          title="Why Learning From Life"
+          highlight="Matters"
+          description="Transform experiences into wisdom that shapes your future"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {benefits.map((benefit) => (

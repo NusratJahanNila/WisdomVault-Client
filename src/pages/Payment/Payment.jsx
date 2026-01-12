@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
+import SectionHeader from '../../components/Shared/SectionHeader/SectionHeader';
 
 const Payment = () => {
   const { user } = useAuth();
@@ -82,13 +83,13 @@ const Payment = () => {
     }
 
     try {
-        // payment info:
-        const paymentInfo={
-            price: 12.30,
-            userName:user?.displayName,
-            userEmail:user?.email,
-            userImage:user?.photoURL
-        }
+      // payment info:
+      const paymentInfo = {
+        price: 12.30,
+        userName: user?.displayName,
+        userEmail: user?.email,
+        userImage: user?.photoURL
+      }
       //  checkout session
       const res = await axiosSecure.post('/create-checkout-session', paymentInfo);
 
@@ -107,17 +108,15 @@ const Payment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-teal-50 py-12 px-4 dark:from-gray-900 dark:to-gray-900">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-teal-50 py-16 px-4 dark:from-gray-900 dark:to-gray-900">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 dark:text-white">
-            Upgrade to <span className="text-primary dark:text-teal-400">Premium</span>
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
-            Unlock exclusive features and take your wisdom journey to the next level
-          </p>
-        </div>
+        <SectionHeader
+          subtitle="Unlock Exclusive"
+          title="Upgrade to"
+          highlight="Premium"
+          description="Unlock exclusive features and take your wisdom journey to the next level"
+        />
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
@@ -128,7 +127,7 @@ const Payment = () => {
               <div className="text-4xl font-bold text-gray-900 mb-2 dark:text-white">৳0</div>
               <p className="text-gray-500 dark:text-gray-400">Forever free</p>
             </div>
-            
+
             <ul className="space-y-4 mb-8">
               {features.slice(0, 4).map((item, idx) => (
                 <li key={idx} className="flex items-center gap-3">
@@ -146,7 +145,7 @@ const Payment = () => {
             <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 rounded-bl-lg font-semibold dark:bg-teal-700">
               Most Popular
             </div>
-            
+
             <div className="text-center mb-8">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <FaCrown className="text-primary text-2xl dark:text-teal-400" />
@@ -155,7 +154,7 @@ const Payment = () => {
               <div className="text-4xl font-bold text-gray-900 mb-2 dark:text-white">৳1500</div>
               <p className="text-gray-600 dark:text-gray-400">One-time payment • Lifetime access</p>
             </div>
-            
+
             <ul className="space-y-4 mb-8">
               {features.map((item, idx) => (
                 <li key={idx} className="flex items-center gap-3">
@@ -165,7 +164,7 @@ const Payment = () => {
                 </li>
               ))}
             </ul>
-            
+
             <button
               onClick={handleUpgrade}
               className="btn bg-linear-to-r from-primary to-amber-500 hover:from-primary hover:to-amber-600 text-white border-0 w-full text-lg font-semibold py-4 dark:from-teal-700 dark:to-teal-600 dark:hover:from-teal-600 dark:hover:to-teal-500"

@@ -50,11 +50,11 @@ const Navbar = () => {
                         `font-medium text-lg ${isActive ? 'text-[#F69074] dark:text-[#F69074] font-semibold' : 'text-[#02a2a2] dark:text-white hover:text-[#02a2a2] dark:hover:text-[#A0EBEB]'}`
                     }>Add Lesson</NavLink>
                 </li>
-                <li>
+                {/* <li>
                     <NavLink to={'/dashboard/my-lessons'} className={({ isActive }) =>
                         `font-medium text-lg ${isActive ? 'text-[#F69074] dark:text-[#F69074] font-semibold' : 'text-[#02a2a2] dark:text-white hover:text-[#02a2a2] dark:hover:text-[#A0EBEB]'}`
                     }>My Lessons</NavLink>
-                </li>
+                </li> */}
             </>
         }
         <li>
@@ -80,7 +80,7 @@ const Navbar = () => {
                     `font-medium text-lg ${isActive ? 'text-[#F69074] dark:text-[#F69074] font-semibold' : 'text-[#02a2a2] dark:text-white hover:text-[#02a2a2] dark:hover:text-[#A0EBEB]'}`
                 }>
                     <span className="flex items-center gap-1">
-                        ⭐ Upgrade
+                        Upgrade
                     </span>
                 </NavLink>
             </li>
@@ -109,8 +109,8 @@ const Navbar = () => {
                         {/* Logo */}
                         <Link to={'/'} className='flex gap-2 items-center'>
                             <img src={logo} alt="WisdomVault Logo" className='w-10 h-10' />
-                            <span className={'font-bold text-xl text-[#02a2a2] dark:text-white'}>
-                                Wisdom<span className='text-[#F69074] dark:text-[#F69074]'>Vault</span>
+                            <span className={'font-bold text-xl text-[#02a2a2] dark:text-white hidden md:block'}>
+                                Wisdom<span className='text-[#F69074] dark:text-[#F69074] '>Vault</span>
                             </span>
                         </Link>
                     </div>

@@ -102,7 +102,7 @@ const Banner = () => {
                 >
                     {slides.map((slide, index) => (
                         <div key={index} className="h-[65vh] min-h-[400px] flex items-center justify-center p-4 lg:p-8">
-                            <div className="rounded-2xl overflow-hidden shadow-2xl p-6 bg-[#A0EBEB]/10 dark:bg-gray-800/50 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[350px] max-w-7xl w-full transition-colors duration-300">
+                            <div className="rounded-2xl overflow-hidden shadow-2xl p-6 bg-[#A0EBEB]/10 dark:bg-gray-800/50 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[350px] max-w-6xl w-full transition-colors duration-300">
                                 {/* Text Content - Right side on desktop, top on mobile */}
                                 <div className="md:order-1 order-2 p-4">
                                     <h2 className="text-2xl lg:text-3xl font-bold mb-3 leading-tight text-gray-800 dark:text-white transition-colors duration-300">
@@ -139,7 +139,7 @@ const Banner = () => {
 
             {/* Preview Thumbnails */}
             <div className="w-full bg-white dark:bg-gray-900 py-6 px-4 transition-colors duration-300">
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-6xl mx-auto">
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                         {slides.map((slide, index) => (
                             <button

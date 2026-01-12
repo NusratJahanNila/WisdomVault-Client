@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { Heart, Shield, Users, Book, ChevronRight, Star, Award, Globe } from 'lucide-react';
+import SectionHeader from '../../components/Shared/SectionHeader/SectionHeader';
 
 const AboutPage = () => {
     const [counters, setCounters] = useState({
@@ -62,28 +63,28 @@ const AboutPage = () => {
 
     const teamMembers = [
         {
-            name: "Sarah Chen",
+            name: "Nusrat Jahan",
             role: "Founder & CEO",
             bio: "Former therapist turned tech entrepreneur, passionate about making wisdom accessible to everyone.",
-            image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face"
+            image: "https://i.ibb.co.com/21CcGhj4/profile.jpg"
         },
         {
-            name: "Marcus Rodriguez",
+            name: "Nila Moni",
             role: "Head of Product",
             bio: "UX designer with 10+ years creating meaningful digital experiences that connect people.",
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face"
+            image: "https://i.ibb.co.com/WN0BbwdV/photo-1494790108377-be9c29b29330-q-80-w-687-auto-format-fit-crop-ixlib-rb-4-1.jpg"
         },
         {
-            name: "Dr. Amara Okafor",
+            name: "Sarah Jahan",
             role: "Chief Psychology Officer",
             bio: "Clinical psychologist specializing in emotional intelligence and personal development.",
             image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face"
         },
         {
-            name: "James Park",
+            name: "Jannatul Naima ",
             role: "Lead Developer",
             bio: "Full-stack engineer focused on building scalable platforms that handle millions of stories.",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+            image: "https://i.ibb.co.com/FqjgGXFB/photo-1438761681033-6461ffad8d80-q-80-w-1170-auto-format-fit-crop-ixlib-rb-4-1.jpg"
         }
     ];
 
@@ -136,32 +137,15 @@ const AboutPage = () => {
     return (
         <div className="min-h-screen bg-base-100 dark:bg-gray-900 transition-colors duration-300">
 
-            {/* Hero Section */}
-            <section className="py-6 lg:py-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="animate-fade-in ">
-                        <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
-                            Our Story
-                        </h1>
-                        <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed transition-colors duration-300">
-                            We believe that every person carries within them a treasure trove of wisdom gained through life's experiences.
-                            WisdomVault exists to help you discover, organize, and share these precious insights with the world.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
             {/* Mission & Values */}
             <section className="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-                            Our Values
-                        </h2>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
-                            These core principles guide everything we do and shape the community we're building together.
-                        </p>
-                    </div>
+                <div className="max-w-6xl mx-auto px-2 lg:px-4">
+                    <SectionHeader
+                        subtitle="Our Philosophy"
+                        title="Our"
+                        highlight="Values"
+                        description="These core principles guide everything we do and shape the community we're building together"
+                    />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((value, index) => (
@@ -186,7 +170,7 @@ const AboutPage = () => {
 
             {/* Team Section */}
             <section className="py-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-6xl mx-auto px-2 sm:px-3 lg:px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                             Meet Our Team
@@ -227,7 +211,7 @@ const AboutPage = () => {
 
             {/* Timeline */}
             <section className="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-6xl mx-auto px-2 lg:px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                             Our Journey
@@ -267,7 +251,7 @@ const AboutPage = () => {
 
             {/* Stats Counter */}
             <section id="stats-section" className="py-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-6xl mx-auto px-2 lg:px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                             Our Impact
@@ -277,7 +261,7 @@ const AboutPage = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         <div className="text-center">
                             <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                                 <Users className="w-12 h-12 text-[#F69074] mx-auto mb-4" />
