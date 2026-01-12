@@ -146,7 +146,7 @@ const Lessons = () => {
             </div>
 
             {/* Lessons */}
-            <div className="grid md:grid-cols-3 grid-cols-1 gap-3">
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 grid-cols-1 gap-3">
                 {lessons.map(lesson => (
                     <LessonCard key={lesson._id} lesson={lesson} />
                 ))}
